@@ -3,7 +3,7 @@ name: User Story
 about: Records a User Story
 title: "[STORY] - "
 labels: ''
-assignees: ''
+assignees: LaurieAnderson92
 
 ---
 
@@ -15,7 +15,6 @@ assignees: ''
 **So that I can:** [...]
 
 ## Acceptance Criteria
-[ ] -
-[ ] -
-[ ] -
-[ ] -
+- [ ]
+- [ ]
+- [ ]
