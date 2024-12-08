@@ -14,16 +14,56 @@
     <title>Crafting Covern</title>
 </head>
 <body>
-    <header>
-        <div class="p-3 mb-2 bg-primary text-white">header</div>
+    <header class="container-fluid bg-primary">
+        <!-- Logo, Search Bar, Account -->
+        <div class="row">
+            <div class="col-2 p-3 bg-danger text-white">
+                Crafting Covern
+            </div>
+
+        </div>
+        <!-- Product Navigation Bar -->
+        <nav class="bg-light  col-12">
+            <ul class="nav nav-tabs jh">
+                <a class="nav-link" href="#" role="button" aria-haspopup="true" aria-expanded="false">All Products</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Enchant Your Familair</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Separated link</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Charm Your Outfit</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Separated link</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Betwitch Your Home</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Separated link</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
     </header>
 
-    <nav>
-        <div class="p-3 mb-2 bg-secondary text-white">nav</div>
-    </nav>
 
-    <footer>
-        <div class="p-3 mb-2 bg-success text-white">footer</div>
+
+    <footer class="bg-success fixed-bottom">
+        <div class="p-3 text-white">footer</div>
     </footer>
     {% block corejs %}
         <script src="https://kit.fontawesome.com/e9c73d7092.js" crossorigin="anonymous"></script>
