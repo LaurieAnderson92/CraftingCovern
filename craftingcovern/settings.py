@@ -23,10 +23,21 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-f*g)ud0$b4uxlfosg(1p3rh2qwk(blxj39!dy9jqi)d1^ui6__'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['8000-laurieander-craftingcov-kw8qer1r30r.ws.codeinstitute-ide.net']
+ALLOWED_HOSTS = ['8000-laurieander-craftingcov-kw8qer1r30r.ws.codeinstitute-ide.net','.herokuapp.com']
 
+CSRF_TRUSTED_ORIGINS = ['https://8000-laurieander-craftingcov-kw8qer1r30r.ws.codeinstitute-ide.net']
+
+CSRF_ALLOWED_ORIGINS = ['https://8000-laurieander-craftingcov-kw8qer1r30r.ws.codeinstitute-ide.net']
+
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by email
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
 
 # Application definition
 
@@ -37,9 +48,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
 
     'products',
 ]
+
+SITE_ID = 1
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -49,6 +67,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'craftingcovern.urls'
