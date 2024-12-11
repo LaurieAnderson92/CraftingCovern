@@ -1,3 +1,6 @@
+{% url 'account_login' as login_url %}
+{% url 'account_signup' as signup_url %}
+{% url 'account_logout' as logout_url %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,18 +17,17 @@
     <title>Crafting Covern</title>
 </head>
 <body>
-    <header class="container-fluid bg-primary">
+    <header class="container-fluid bg-light">
         <!-- Logo, Search Bar, Account -->
         <div class="row">
-            <div class="col-2 p-3 bg-danger text-white">
-                Crafting Covern
+            <div class="col-2 p-3 bg-light">
+                <a href="{% url 'home' %}" class="text-decoration-none">Crafting Covern</a>
             </div>
-
         </div>
         <!-- Product Navigation Bar -->
         <nav class="bg-light  col-12">
-            <ul class="nav nav-tabs jh">
-                <a class="nav-link" href="#" role="button" aria-haspopup="true" aria-expanded="false">All Products</a>
+            <ul class="nav nav-tabs justify-content-center">
+                <a class="nav-link" href="{% url 'products_all' %}" role="button" aria-haspopup="true" aria-expanded="false">All Products</a>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Enchant Your Familair</a>
                     <div class="dropdown-menu">
@@ -64,9 +66,9 @@
 
     {% endblock content %}
 
-    <footer class="bg-success fixed-bottom">
+    <footer class="bg-light fixed-bottom">
         <!-- footer -->
-        <div class="p-3 text-white">footer</div>
+        <div class="p-3">footer</div>
     </footer>
     {% block corejs %}
         <script src="https://kit.fontawesome.com/e9c73d7092.js" crossorigin="anonymous"></script>
