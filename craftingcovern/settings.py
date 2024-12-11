@@ -67,7 +67,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'craftingcovern.urls'
@@ -100,6 +99,8 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+DATABASE_URL = ['postgresql://neondb_owner:6HMZB3OAVcGn@ep-wispy-cloud-a204tc3f.eu-central-1.aws.neon.tech/grill_early_smog_626681',]
 
 
 # Password validation

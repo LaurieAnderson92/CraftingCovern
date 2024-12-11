@@ -17,6 +17,6 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.index, name='products-home'), # prefixed with app name to help identify in a reverse lookup
-    path('product/', views.ProductList.as_view(), name='products-all'),
+    path('', views.index, name='home'),
+    path('product/', views.ProductList.as_view(), name='products_all'),
 ]
