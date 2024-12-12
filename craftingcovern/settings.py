@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
 from pathlib import Path
+if os.path.isfile('env.py'):
+    import env
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -48,9 +50,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cloudinary_storage',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'cloudinary',
 
     'products',
 ]
@@ -102,6 +106,7 @@ DATABASES = {
 
 DATABASE_URL = ['postgresql://neondb_owner:6HMZB3OAVcGn@ep-wispy-cloud-a204tc3f.eu-central-1.aws.neon.tech/grill_early_smog_626681',]
 
+CLOUDINARY_URL = os.environ.get('CLOUDINARY_URL')
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
