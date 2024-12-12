@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.views import generic
 from .models import Product
@@ -14,3 +14,15 @@ class ProductList(generic.ListView):
     model = Product
     template_name = "products/product_list.html"
     paginate_by = 12
+
+def product_detail(request, id):
+    """A View to return the detail page for a product"""
+
+    queryset = Product
+    product = get_object_or_404(queryset, id=id)
+
+    return render(
+        request,
+        'products/product_detail.html',
+        {"product": product},
+    )
