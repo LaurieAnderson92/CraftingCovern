@@ -9,7 +9,6 @@
               <div class="card-body">
                   <a href="#">
                   <h2 class="card-title">{{ product.name }}</h2>
-                  <p class="card-text h6">{{ product.sku }}</p>
                   <hr>
                   <p class="card-text">{{ product.cost }}</p>
                   <img class="card-img-top" src=" {{ product.image.url }}"
@@ -21,8 +20,8 @@
   {% endfor %}
   </div>
   <!-- Pagnation code, taken from Code|star project -->
-  <!-- This code creates the ability to cycle through the pages if the number is spells is 
-  greater than the value set in the SpellList View -->
+  <!-- This code creates the ability to cycle through the pages if the number of products is 
+  greater than the value set in the ProductList View -->
   {% if is_paginated %}
   <nav aria-label="Page navigation">
     <ul class="pagination justify-content-center">
