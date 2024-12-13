@@ -23,6 +23,20 @@
             <div class="col-2 p-3 bg-light">
                 <a href="{% url 'home' %}" class="text-decoration-none">Crafting Covern</a>
             </div>
+            <div class="col-12 col-lg-8 my-auto justify-content-center">
+                <form method="GET" action="{% url 'products_all' %}">
+                    <div class="input-group w-100">
+                        <input class="form-control" type="text" name="q" placeholder="Search our site">
+                        <div class="input-group-append">
+                            <button class="form-control btn btn-black border border-black rounded-0" type="submit">
+                                <span class="icon">
+                                    <i class="fas fa-search"></i>
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>           
         </div>
         
         <!-- Product Navigation Bar -->
