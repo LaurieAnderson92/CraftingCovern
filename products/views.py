@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect, reverse
+from django.db.models.functions import Lower
 from django.http import HttpResponse
 from django.db.models import Q
-from django.views import generic
 from .models import Product, Category
 
 # Create your views here.
@@ -26,14 +26,12 @@ def product_list(request):
             if sortkey == 'name':
                 sortkey = 'lower_name'
                 products = products.annotate(lower_name=Lower('name'))
-            if sortkey == 'category':
-                sortkey = 'category__name'
+
             if 'direction' in request.GET:
                 direction = request.GET['direction']
                 if direction == 'desc':
                     sortkey = f'-{sortkey}'
-            products = products.order_by(sortkey)
-
+                products = products.order_by(sortkey)
 
         if 'category' in request.GET:
             categories = request.GET['category'].split(',')
@@ -52,16 +50,15 @@ def product_list(request):
 
     context = {
         'products': products,
-        'search_term': query,
+        'query': query,
         'current_categories': categories,
         'current_sorting': current_sorting,
     }
 
-    print(products)
     return render(
     request,
     'products/product_list.html',
-    {"products": products},
+    context,
     )
 
 def product_detail(request, id):
