@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.db.models.functions import Lower
+from django.views.generic import CreateView
 from django.http import HttpResponse
 from django.db.models import Q
 from .models import Product, Category
@@ -72,3 +73,7 @@ def product_detail(request, id):
         'products/product_detail.html',
         {"product": product},
     )
+
+class ProductCreateView(CreateView):
+    model = Product
+    fields = ['name', 'sku', 'category', 'description', 'dimension', 'cost', 'craft_time', 'image']
