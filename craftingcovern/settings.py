@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-f*g)ud0$b4uxlfosg(1p3rh2qwk(blxj39!dy9jqi)d1^ui6__'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = false
 
 ALLOWED_HOSTS = ['8000-laurieander-craftingcov-kw8qer1r30r.ws.codeinstitute-ide.net','.herokuapp.com']
 
@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'cloudinary',
+    'crispy_forms',
 
     'products',
 ]
