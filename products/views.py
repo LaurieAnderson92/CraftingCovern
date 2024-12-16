@@ -85,9 +85,29 @@ def product_new(request):
             return redirect(reverse('products_all'))
     else:
         form = ProductForm()
-    template = 'products/product_form.html'
+
+    template = 'products/product_add.html'
     context = {
         'form': form,
+    }
+
+    return render(request, template, context)
+
+def product_edit(request, id):
+    product = get_object_or_404(Product, pk=id)
+
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES, instance=product)
+        if form.is_valid:
+            form.save()
+            return redirect('product_detail', id)
+    else:
+        form = ProductForm(instance=product)
+        
+    template = 'products/product_edit.html'
+    context = {
+    'form': form,
+    "product": product,
     }
 
     return render(request, template, context)

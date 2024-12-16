@@ -11,6 +11,7 @@
     <h2>£{{ product.cost }}</h2>
     <p>{{ product.description }}</p>
     <p>{{ product.dimension }}</p>
+    <a href="{% url 'products_edit' product.id %}">Edit</a>
   </div>
 </div>
 {% endblock content %}
