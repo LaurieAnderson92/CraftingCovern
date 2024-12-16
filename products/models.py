@@ -27,7 +27,6 @@ class Product(models.Model):
     dimension = models.TextField()
     cost = models.DecimalField(max_digits=6, decimal_places=2)
     craft_time = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(40)])
-    image_url = models.URLField(max_length=1024, null=True, blank=True)
     image = CloudinaryField('image', default='placeholder')
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)

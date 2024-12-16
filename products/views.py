@@ -3,7 +3,9 @@ from django.db.models.functions import Lower
 from django.views.generic import CreateView
 from django.http import HttpResponse
 from django.db.models import Q
+
 from .models import Product, Category
+from .forms import ProductForm
 
 # Create your views here.
 
@@ -74,6 +76,18 @@ def product_detail(request, id):
         {"product": product},
     )
 
-class ProductCreateView(CreateView):
-    model = Product
-    fields = ['name', 'sku', 'category', 'description', 'dimension', 'cost', 'craft_time', 'image']
+def product_new(request):
+    
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES)
+        if form.is_valid:
+            form.save()
+            return redirect(reverse('products_all'))
+    else:
+        form = ProductForm()
+    template = 'products/product_form.html'
+    context = {
+        'form': form,
+    }
+
+    return render(request, template, context)

@@ -1,15 +1,17 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <div class="content-section">
-        <form method="POST">
-            {% csrf_token %}
+    <div class="">
+        <form method="POST" enctype="multipart/form-data"> 
+            <!-- enctype is needed for any HTML form sending media files -->
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Create Product</legend>
+                <legend class="border-bottom">Create Product</legend>
+                {% csrf_token %}
                 {{ form|crispy }}
             </fieldset>
             <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Create</button>
+                <a class="btn btn-outline-info" href="{% url 'products_all' %}">Cancel</a>
+                <button class="btn btn-outline-info" type="submit">Create Product</button>
             </div>
         </form>
     </div>
