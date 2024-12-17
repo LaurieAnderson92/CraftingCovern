@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %}
 {% block content %}
     <div class="">
-        <form method="POST" enctype="multipart/form-data" action="{%url 'products_edit' product.id %}"> 
+        <form method="POST" enctype="multipart/form-data" action="{%url 'product_edit' product.id %}"> 
             <!-- enctype is needed for any HTML form sending media files -->
             <fieldset class="form-group">
                 <legend class="border-bottom">Edit Product</legend>
@@ -10,7 +10,7 @@
                 {{ form|crispy }}
             </fieldset>
             <div class="form-group">
-                <a class="btn btn-outline-info" href="{% url 'products_all' %}">Cancel</a>
+                <a class="btn btn-outline-info" href="{% url 'product_all' %}">Cancel</a>
                 <button class="btn btn-outline-info" type="submit">Edit Product</button>
             </div>
         </form>

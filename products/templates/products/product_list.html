@@ -21,7 +21,7 @@
             <div class="col-12 col-md-6">
                 <p class="text-muted mt-3 text-center text-md-left">
                     {% if query or current_categories or current_sorting != 'None_None' %}
-                        <span class="small"><a href="{% url 'products_all' %}">Products Home</a> | </span>
+                        <span class="small"><a href="{% url 'product_all' %}">Products Home</a> | </span>
                     {% endif %}
                     {{ products|length }} Products{% if query %} found for <strong>"{{ query }}"</strong>{% endif %}
                 </p>

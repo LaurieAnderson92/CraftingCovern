@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.db.models.functions import Lower
+from django.utils.timezone import now
 from django.views.generic import CreateView
 from django.http import HttpResponse
 from django.db.models import Q
@@ -16,7 +17,7 @@ def index(request):
 # Uses Django Generic list view
 def product_list(request):
 
-    products = Product.objects.all()
+    products = Product.objects.filter(deleted_on=None)
     query = None
     categories = None
     sort = None
@@ -44,7 +45,7 @@ def product_list(request):
         if 'q' in request.GET:
             query = request.GET['q']
             if not query:
-                return redirect(reverse('products_all'))
+                return redirect(reverse('product_all'))
             
             queries = Q(name__icontains=query) | Q(description__icontains=query)
             products = products.filter(queries)
@@ -82,7 +83,7 @@ def product_new(request):
         form = ProductForm(request.POST, request.FILES)
         if form.is_valid:
             form.save()
-            return redirect(reverse('products_all'))
+            return redirect(reverse('product_all'))
     else:
         form = ProductForm()
 
@@ -111,3 +112,11 @@ def product_edit(request, id):
     }
 
     return render(request, template, context)
+
+def product_delete(request, id):
+    product = get_object_or_404(Product, pk=id)
+
+    product.deleted_on = now()
+    product.save()
+    return redirect(reverse('product_all'))
+    
