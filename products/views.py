@@ -68,7 +68,7 @@ def product_list(request):
 def product_detail(request, id):
     """A View to return the detail page for a product"""
 
-    queryset = Product
+    queryset = Product.objects.all()
     product = get_object_or_404(queryset, id=id)
 
     return render(

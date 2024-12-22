@@ -20,6 +20,7 @@
         <div class="row">
             <div class="col-2 p-3 bg-light">
                 <a href="{% url 'home' %}" class="text-decoration-none">Crafting Covern</a>
+                
             </div>
             <div class="col-12 col-lg-8 my-auto justify-content-center">
                 <form method="GET" action="{% url 'product_all' %}">
@@ -36,12 +37,30 @@
                 </form>
             </div>
             <div class="col-2 p-3 bg-light">
-                <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa-solid fa-wrench"></i></a>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="{% url 'product_create' %}">Add a Product</a>
-                </div>
+                <ul class="nav">
+                     <li class="nav-item">
+                        <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa-solid fa-wrench"></i></a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{% url 'product_create' %}">Add a Product</a>
+                        </div>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == logout_url %}active{% endif %}"
+                            href="{% url 'account_logout' %}">Logout</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == signup_url %}active{% endif %}"
+                            href="{% url 'account_signup' %}">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == login_url %}active{% endif %}"
+                            href="{% url 'account_login' %}">Login</a>
+                    </li>
+                    {% endif %}
+                </ul>
             </div>
-            
         </div>         
         <!-- Product Navigation Bar -->
         <nav class="bg-light  col-12">

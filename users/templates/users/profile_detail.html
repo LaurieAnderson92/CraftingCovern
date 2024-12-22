@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row mt-5">
+
+  <div class="col-4 offset-4">
+    <h1>{{ user.first_name }} {{ user.last_name }}</h1>
+    <h2>{{ user.auth_user.email }}</h2>
+    {% if user.is_admin == True %}
+    <p>Admin</p>
+    {% endif %}
+    {% if user.is_crafter == True %}
+    <p>Crafter</p>
+    {% endif %}
+    {% if user.is_crafter != True and user.is_admin != True %}
+    <p>User</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock content %}
