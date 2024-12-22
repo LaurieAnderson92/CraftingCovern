@@ -17,6 +17,5 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('user/<int:id>/', views.user_detail, name='user_detail'),
-    # path('user/edit/<int:id>/', views.user_edit, name='user_edit'),
+    path('profile/<int:id>/', views.profile_detail, name='profile_detail'),
 ]

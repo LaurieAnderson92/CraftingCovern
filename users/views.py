@@ -1,18 +1,18 @@
 from django.shortcuts import render, get_object_or_404, HttpResponseRedirect, redirect
-from .models import User
+from .models import Profile
 
 # Create your views here.
 
-def user_detail(request, id):
-    query = User.objects.all()
-    print("this is query = ",query)
+def profile_detail(request, id):
+    query = Profile.objects.all()
+    #print("this is query = ",query)
 
-    user = get_object_or_404(query, id=id)
-    print("this is user = ",user)
+    profile = get_object_or_404(query, id=id)
+    #print("this is user = ",user)
 
     return render(
         request,
-        'users/user_detail.html',
-        {'user': user }
+        'users/profile_detail.html',
+        {'user': profile }
     )
 
