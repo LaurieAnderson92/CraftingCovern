@@ -6,13 +6,16 @@ from django.conf import settings
 
 from users.models import Profile
 from products.models import Product
+from django.contrib.auth.models import User
 
 # Create your models here.
 
 class Order(models.Model):
 
     order_number = models.CharField(max_length=32, null=False, editable=False)
-    customer = models.ForeignKey(Profile, null=True, blank=False, on_delete=models.SET_NULL)
+    customer = models.OneToOneField(
+        User, on_delete=models.CASCADE, related_name="customer", primary_key=True
+    )
     product = models.ForeignKey(Product, null=True, blank=False, on_delete=models.SET_NULL)
     full_name = models.CharField(max_length=50, null=False, blank=False)
     email = models.EmailField(max_length=254, null=False, blank=False)

@@ -4,16 +4,16 @@ from django.core.validators import MinValueValidator
 from cloudinary.models import CloudinaryField
 
 class Profile(models.Model):
-    auth_user = models.ForeignKey(
-        User, null=True, on_delete=models.SET_NULL, related_name="auth_user"
+    auth_user = models.OneToOneField(
+        User, on_delete=models.CASCADE, related_name="auth_user", primary_key=True
     )
     first_name = models.CharField(max_length=254)
     last_name = models.CharField(max_length=254)
-    is_crafter = models.BooleanField()
-    is_admin = models.BooleanField()
-    craft_time_commited = models.IntegerField(validators=[MinValueValidator(1)], null=True)
-    craft_time_max = models.IntegerField(validators=[MinValueValidator(1)], null=True)
-    image = CloudinaryField('image', null=True)
+    is_crafter = models.BooleanField(default=False)
+    is_admin = models.BooleanField(default=False)
+    craft_time_commited = models.IntegerField(validators=[MinValueValidator(1)], null=True, blank=True)
+    craft_time_max = models.IntegerField(validators=[MinValueValidator(1)], null=True, blank=True)
+    image = CloudinaryField('image', null=True, blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
     deleted_on = models.DateTimeField(null=True, blank=True)
