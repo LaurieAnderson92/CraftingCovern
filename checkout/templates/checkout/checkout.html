@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+
+        </div>
+    </div>
+</div>
+
+
+{% block content %}
+<div class="row mt-5">
+    <div class="col-4 offset-4">
+        <p>Please fill out the form below to complete your order</p>
+        <form action="{% url 'checkout_detail' %}" method="POST" id="payment-form">
+            {% csrf_token %}
+            <fieldset class="rounded">
+                <legend class="small">Your Details</legend>
+                {{ order_form.full_name | as_crispy_field }}
+                {{ order_form.email | as_crispy_field }}
+            </fieldset>
+            <fieldset class="rounded"></fieldset>
+                <legend class="small">Package Details</legend>
+                {{ order_form.phone_number | as_crispy_field }}
+                {{ order_form.country | as_crispy_field }}
+                {{ order_form.postcode | as_crispy_field }}
+                {{ order_form.town_or_city | as_crispy_field }}
+                {{ order_form.street_address1 | as_crispy_field }}
+                {{ order_form.street_address2 | as_crispy_field }}
+                {{ order_form.county | as_crispy_field }}
+                <div class="form-check form-check-inline float-right mr-0">
+                    {% if user.is_authenticated %}
+                        <label class="form-check-label" for="id-save-info">Save this delivery information to my profile</label>
+                        <input class="form-check-input ml-2 mr-0" type="checkbox" id="id-save-info" name="save-info" checked>
+                    {% else %}
+                        <label class="form-check-label" for="id-save-info">
+                            <a class="text-info" href="{% url 'account_signup' %}">Create an account</a> or 
+                            <a class="text-info" href="{% url 'account_login' %}">login</a> to save this information
+                        </label>
+                    {% endif %}
+                </div>
+            <fieldset class="rounded">
+                <legend class="small">Payment Details</legend>
+
+                <!-- A Stripe card element -->
+                <div id="card-element"></div>
+
+                <!-- Display form errors -->
+                <div class="text-danger" id="card-errors"></div>
+            </fieldset>
+            <button id="submit-button" class="btn btn-black rounded-0">
+                <span class="font-weight-bold">Complete Order</span>
+                <span class="icon">
+                    <i class="fas fa-lock"></i>
+                </span>
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock content %}
