@@ -4,15 +4,15 @@
 <div class="row mt-5">
 
   <div class="col-4 offset-4">
-    <h1>{{ user.first_name }} {{ user.last_name }}</h1>
-    <h2>{{ user.auth_user.email }}</h2>
-    {% if user.is_admin == True %}
+    <h1>{{ profile.first_name }} {{ profile.last_name }}</h1>
+    <h2>{{ profile.auth_user.email }}</h2>
+    {% if profile.is_admin == True %}
     <p>Admin</p>
     {% endif %}
-    {% if user.is_crafter == True %}
+    {% if profile.is_crafter == True %}
     <p>Crafter</p>
     {% endif %}
-    {% if user.is_crafter != True and user.is_admin != True %}
+    {% if profile.is_crafter != True and profile.is_admin != True %}
     <p>User</p>
     {% endif %}
   </div>

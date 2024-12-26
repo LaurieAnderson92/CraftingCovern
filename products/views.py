@@ -7,6 +7,7 @@ from django.db.models import Q
 
 from .models import Product, Category
 from .forms import ProductForm
+from users.models import Profile
 
 # Create your views here.
 
@@ -68,14 +69,29 @@ def product_list(request):
 def product_detail(request, id):
     """A View to return the detail page for a product"""
 
-    queryset = Product.objects.all()
-    product = get_object_or_404(queryset, id=id)
+    auth_user_id = request.user.pk
 
-    return render(
-        request,
-        'products/product_detail.html',
-        {"product": product},
-    )
+    queryset_product = Product.objects.all()
+    product = get_object_or_404(queryset_product, id=id)
+
+    try: 
+        profile = Profile.objects.get(auth_user_id=auth_user_id)
+        return render(
+            request,
+            'products/product_detail.html',
+            {
+                "product": product,
+                "profile": profile
+            },
+        )
+    except:
+        return render(
+            request,
+            'products/product_detail.html',
+            {
+                "product": product,
+            },
+        )
 
 def product_new(request):
     
