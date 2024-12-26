@@ -38,12 +38,15 @@
             </div>
             <div class="col-2 p-3 bg-light">
                 <ul class="nav">
-                     <li class="nav-item">
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
                         <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa-solid fa-wrench"></i></a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="{% url 'product_create' %}">Add a Product</a>
+                            <a class="dropdown-item" href="{% url 'profile_detail' user.pk %}">Profile</a>
                         </div>
                     </li>
+                    {% endif %}
                     {% if user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link {% if request.path == logout_url %}active{% endif %}"
