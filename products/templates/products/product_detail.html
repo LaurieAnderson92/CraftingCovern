@@ -15,7 +15,8 @@
     <a href="{% url 'product_edit' product.id %}">Edit</a>
     <a href="{% url 'product_delete' product.id %}">Delete</a>
     {% endif %}
-    <a href="{% url 'checkout_detail' %}">Checkout</a>
+    <a href="{% url 'checkout' product.id %}">Checkout</a>
   </div>
 </div>
 {% endblock content %}
+

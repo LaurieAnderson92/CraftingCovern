@@ -5,10 +5,13 @@ from .models import Order
 class OrderForm(forms.ModelForm):
     class Meta:
         model = Order
-        fields = ('full_name', 'email', 'phone_number',
-                  'street_address1', 'street_address2',
-                  'town_or_city', 'postcode', 'country',
-                  'county',)
+        fields = ('customer', 'product','full_name', 
+                'email', 'phone_number',
+                'street_address1', 'street_address2',
+                'town_or_city', 'postcode', 'country',
+                'county', 'customisation', 'delivery_cost', 
+                'order_cost', 'grand_total',
+                )
 
     def __init__(self, *args, **kwargs):
         """
@@ -17,6 +20,8 @@ class OrderForm(forms.ModelForm):
         """
         super().__init__(*args, **kwargs)
         placeholders = {
+            'customer': 'Customer',
+            'product': 'Product',
             'full_name': 'Full Name',
             'email': 'Email Address',
             'phone_number': 'Phone Number',
@@ -26,9 +31,14 @@ class OrderForm(forms.ModelForm):
             'street_address1': 'Street Address 1',
             'street_address2': 'Street Address 2',
             'county': 'County',
+            'customisation': 'List any customizations you would like, such as colour or texture',
+            'delivery_cost': 'delivery_cost',
+            'order_cost': 'order_cost',
+            'grand_total': 'grand_total',
         }
 
-        self.fields['full_name'].widget.attrs['autofocus'] = True
+        self.fields['customer'].widget.attrs['type'] = 'hidden'
+        self.fields['product'].widget.attrs['type'] = 'hidden'
         for field in self.fields:
             if self.fields[field].required:
                 placeholder = f'{placeholders[field]} *'
@@ -37,3 +47,4 @@ class OrderForm(forms.ModelForm):
             self.fields[field].widget.attrs['placeholder'] = placeholder
             self.fields[field].widget.attrs['class'] = 'stripe-style-input'
             self.fields[field].label = False
+            self.fields['full_name'].widget.attrs['autofocus'] = True

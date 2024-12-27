@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 <div class="container">
     <div class="row">
         <div class="col">
@@ -11,9 +13,9 @@
 
 {% block content %}
 <div class="row mt-5">
-    <div class="col-4 offset-4">
+    <div class="col-4 offset-2">
         <p>Please fill out the form below to complete your order</p>
-        <form action="{% url 'checkout_detail' %}" method="POST" id="payment-form">
+        <form action="#" method="POST" id="payment-form">
             {% csrf_token %}
             <fieldset class="rounded">
                 <legend class="small">Your Details</legend>
@@ -29,6 +31,7 @@
                 {{ order_form.street_address1 | as_crispy_field }}
                 {{ order_form.street_address2 | as_crispy_field }}
                 {{ order_form.county | as_crispy_field }}
+                {{ order_form.customisation | as_crispy_field }}
                 <div class="form-check form-check-inline float-right mr-0">
                     {% if user.is_authenticated %}
                         <label class="form-check-label" for="id-save-info">Save this delivery information to my profile</label>
@@ -57,5 +60,18 @@
             </button>
         </form>
     </div>
+    <div class="col-4">
+        <img class="card-img-bottom" src=" {{ product.image.url }}"
+            alt="{{ product.name }}">
+        <h1>{{ product.name }}</h1>
+        <h2>£{{ product.cost }}</h2>
+    </div>
 </div>
 {% endblock content %}
+
+{% block postloadjs %}
+    {{ block.super }}
+    {{ stripe_public_key|json_script:"id_stripe_public_key" }}
+    {{ client_secret|json_script:"id_client_secret" }}
+    <script src="{% static 'checkout/js/stripe_elements.js' %}"></script>
+{% endblock %}
