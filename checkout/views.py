@@ -1,8 +1,9 @@
-from django.shortcuts import render, reverse
+from django.shortcuts import render, reverse, redirect, get_object_or_404
 from django.conf import settings
 
 from.forms import OrderForm
 from products.models import Product
+from .models import Order
 
 import stripe
 
@@ -10,7 +11,11 @@ def checkout(request, id):
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
 
-    product = Product.objects.filter(id=id).get()
+    try:
+        product = Product.objects.get(id=id)
+    except Product.DoesNotExist:
+        print("Need an Error Message")
+
     product_cost = product.cost
     tenpercernt = product_cost/10
     delivery_cost = 0
@@ -20,21 +25,59 @@ def checkout(request, id):
     else:
         delivery_cost = settings.MINIMUM_DELIVERY_CHARGE
 
-    stripe_total = round((product_cost + delivery_cost) * 100)
+    grand_total = product_cost + delivery_cost
+    stripe_total = round(grand_total * 100)
 
-    stripe.api_key = stripe_secret_key
-    intent = stripe.PaymentIntent.create(
+    if request.method == 'POST':
+        product = Product.objects.get(id=id)
+        customer = request.user
+        form_data = {
+            'customer': customer,
+            'product': product,
+            'full_name': request.POST['full_name'],
+            'email': request.POST['email'],
+            'phone_number': request.POST['phone_number'],
+            'country': request.POST['country'],
+            'postcode': request.POST['postcode'],
+            'town_or_city': request.POST['town_or_city'],
+            'street_address1': request.POST['street_address1'],
+            'street_address2': request.POST.get('street_address2'),
+            'county': request.POST.get('county'),
+            'delivery_cost': delivery_cost,
+            'order_cost': product_cost,
+            'grand_total': grand_total,
+        }
+        order_form = OrderForm(form_data)
+        if order_form.is_valid():
+            order = order_form.save()
+            return redirect(reverse('checkout_success', args=[order.order_number]))
+        else:
+            print("Order not valid")
+    else:
+        stripe.api_key = stripe_secret_key
+        intent = stripe.PaymentIntent.create(
         amount=stripe_total,
         currency=settings.STRIPE_CURRENCY,
-    )
+        )
 
-    order_form = OrderForm()
-    template = "checkout/checkout.html"
+        order_form = OrderForm()
+        template = "checkout/checkout.html"
+        context = {
+            'order_form': order_form,
+            'product': product,
+            'stripe_public_key': stripe_public_key,
+            'client_secret': intent.client_secret,
+        }
+
+    return render(request, template, context)
+
+def checkout_success(request, order_number):
+    """
+    This View handles successful checkouts
+    """
+    order = get_object_or_404(Order, order_number=order_number)
+    template = 'checkout/checkout_success.html'
     context = {
-        'order_form': order_form,
-        'product': product,
-        'stripe_public_key': stripe_public_key,
-        'client_secret': intent.client_secret,
+        'order': order
     }
-
     return render(request, template, context)

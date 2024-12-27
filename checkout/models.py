@@ -13,10 +13,10 @@ from django.contrib.auth.models import User
 class Order(models.Model):
 
     order_number = models.CharField(max_length=32, null=False, editable=False)
-    customer = models.OneToOneField(
-        User, on_delete=models.CASCADE, related_name="customer", primary_key=True
+    customer = models.ForeignKey(
+        User, null=True, blank=False, on_delete=models.SET_NULL, related_name="customer", 
     )
-    product = models.ForeignKey(Product, null=True, blank=False, on_delete=models.SET_NULL)
+    product = models.ForeignKey(Product, null=True, blank=False, on_delete=models.SET_NULL,)
     full_name = models.CharField(max_length=50, null=False, blank=False)
     email = models.EmailField(max_length=254, null=False, blank=False)
     phone_number = models.CharField(max_length=20, null=False, blank=False)
@@ -47,6 +47,7 @@ class Order(models.Model):
             self.delivery_cost = tenpercernt
         else:
             self.delivery_cost = settings.MINIMUM_DELIVERY_CHARG
+        self.grand_total = self.order_cost + self + delivery_cost
         self.save()
 
     def save(self, *args, **kwargs):
