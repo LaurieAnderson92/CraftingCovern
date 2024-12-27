@@ -1,18 +1,55 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <div class="">
+<div class="row justify-content-center">
+    <div class="col-md-6">
         <form method="POST" enctype="multipart/form-data"> 
             <!-- enctype is needed for any HTML form sending media files -->
-            <fieldset class="form-group">
-                <legend class="border-bottom">Create Product</legend>
+            <fieldset class="rounded">
+                <legend class="border-bottom">Add Product</legend>
                 {% csrf_token %}
-                {{ form|crispy }}
+                <div class="row">
+                    <div class="col-4">
+                        {{ form.category| as_crispy_field }}
+                        <p class="text-muted">Only one category possible, please select most accurate</p>
+                    </div>
+                    <div class="col-4">
+                        {{ form.sku| as_crispy_field }}
+                        <p class="text-muted">The SKU(Stock Keeping Unit) for your own records.</p>
+                    </div>
+                    <div class="col-4">
+                        {{ form.name| as_crispy_field }}
+                        <p class="text-muted">The name of your product, Max characters: 254</p>
+                    </div>
+                    <div class="col-4">
+                        {{ form.craft_time| as_crispy_field }}
+                        <p class="text-muted">The amount of hours this will take you to craft</p>
+                    </div>
+                    <div class="col-4">
+                        {{ form.cost| as_crispy_field }}
+                        <p class="text-muted">Cost of the craft, we recommend £15 for ever hour plus materials used</p>
+                    </div>
+                    <div class="col-4">
+                        {{ form.image| as_crispy_field }}
+                        <p class="text-muted">An image to be displayed on the webstite, the image will focus on the center in responsive design so please ensure the product is front and center of the picture. .png and .jpeg supported</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        {{ form.description| as_crispy_field }}
+                        <p class="text-muted">The description of the product</p>
+                    </div>
+                    <div class="col-6">
+                        {{ form.dimension| as_crispy_field }}
+                        <p class="text-muted">The dimmensions of your product</p>
+                    </div>
+                </div>
             </fieldset>
-            <div class="form-group">
-                <a class="btn btn-outline-info" href="{% url 'product_all' %}">Cancel</a>
-                <button class="btn btn-outline-info" type="submit">Create Product</button>
+            <div class="rounded">
+                <a class="btn btn-secondary" href="{% url 'product_all' %}">Cancel</a>
+                <button class="btn btn-success" type="submit">Add Product</button>
             </div>
         </form>
     </div>
+</div>
 {% endblock content %}
