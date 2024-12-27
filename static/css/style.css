@@ -20,20 +20,37 @@ a, p{
     color: black;
 }
 
+/* Products List View */
+
 .product-image{
-    height: 30rem;
+    height: 30vh;
     max-width: 100%;
     border-radius: 8px;
     object-fit: cover;
 }
 
+/* Products Detail View */
+
+#detail-image{
+    border-radius: 8px;
+    height: 70vh;
+    object-fit: cover;
+}
+
 /* Footer */
 footer{
-    position: relative;
+    position: fixed;
+    max-height: 100px;
+    bottom: 0px;
+    width: 100%;
     background: #F5EFFF;
 }
 
 .social-link{
     color: black;
     font-size: 1.5rem;
+}
+
+.buffer{
+    height: 100px;
 }
