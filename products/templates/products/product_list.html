@@ -29,24 +29,27 @@
         </div>
     </div>
 </div>
-<div class="row">
-    <!-- This DTL iterates through the product model and displays them -->
-  {% for product in products %}
-      <div class="col-md-4">
-          <div class="card mb-4">
-              <div class="card-body">
-                  <a href="{% url 'product_detail' product.id %}">
-                  <h2 class="card-title">{{ product.name }}</h2>
-                  <hr>
-                  <p class="card-text">{{ product.cost }}</p>
-                  <img class="card-img-top" src=" {{ product.image.url }}"
-                  alt="{{ product.name }}">
-                  </a>
-              </div>
-          </div>
-      </div>
-  {% endfor %}
-  </div>
+<div class="row justify-content-center">
+    <div class="row container col-lg-10">
+        <!-- This DTL iterates through the product model and displays them -->
+        {% for product in products %}
+        <div class="col-xl-4 col-md-6">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <a href="{% url 'product_detail' product.id %}" class="anchor-text">
+                    <h2 class="card-title">{{ product.name }}</h2>
+                    <hr>
+                    <p class="card-text">£{{ product.cost }}</p>
+                    <img class="card-img-top product-image" src=" {{ product.image.url }}"
+                    alt="{{ product.name }}">
+                    </a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+
   <!-- Pagnation code, taken from Code|star project -->
   <!-- This code creates the ability to cycle through the pages if the number of products is 
   greater than the value set in the ProductList View -->
@@ -62,6 +65,7 @@
     </ul>
   </nav>
   {% endif %}
+</div>
 {% endblock %}
 
 

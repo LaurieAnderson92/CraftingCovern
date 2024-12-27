@@ -11,21 +11,29 @@ a, p{
     font-style: normal;
 }
 
-.logo:hover{
+.logo:hover, .anchor-text:hover{
     text-decoration: none;
     color: black;
 }
 
-.dropdown-item, .nav-link{
+.dropdown-item, .nav-link, .anchor-text{
     color: black;
+}
+
+.product-image{
+    height: 30rem;
+    max-width: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+/* Footer */
+footer{
+    position: relative;
+    background: #F5EFFF;
 }
 
 .social-link{
     color: black;
     font-size: 1.5rem;
-}
-
-footer{
-    position: relative;
-    background: #F5EFFF;
 }
