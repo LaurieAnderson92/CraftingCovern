@@ -98,8 +98,9 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'craftingcovern.wsgi.application'
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
+WSGI_APPLICATION = 'craftingcovern.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases

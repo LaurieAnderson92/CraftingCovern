@@ -4,6 +4,7 @@ from django.utils.timezone import now
 from django.views.generic import CreateView
 from django.http import HttpResponse
 from django.db.models import Q
+from django.contrib import messages
 
 from .models import Product, Category
 from .forms import ProductForm
@@ -99,6 +100,7 @@ def product_new(request):
         form = ProductForm(request.POST, request.FILES)
         if form.is_valid:
             form.save()
+            messages.success(request, f'Added this product to the catalogue')
             return redirect(reverse('product_all'))
     else:
         form = ProductForm()
@@ -117,6 +119,7 @@ def product_edit(request, id):
         form = ProductForm(request.POST, request.FILES, instance=product)
         if form.is_valid:
             form.save()
+            messages.success(request, f'You hare successfully edited: ' + product.name)
             return redirect('product_detail', id)
     else:
         form = ProductForm(instance=product)

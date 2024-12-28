@@ -2,8 +2,8 @@ a, p{
     font-family: "Geist", serif;
 }
 
-/* Logo */
 
+/* Logo */
 .logo{
     font-size: 3rem;
     min-height: fit-content;
@@ -22,6 +22,8 @@ a, p{
     color: black;
 }
 
+
+/* Index Page */
 .background{
     background:url('/media/home-image-off.jpg');
     background-size: cover;
@@ -47,7 +49,6 @@ a, p{
 
 
 /* Products List View */
-
 .product-image{
     height: 30vh;
     max-width: 100%;
@@ -55,13 +56,14 @@ a, p{
     object-fit: cover;
 }
 
-/* Products Detail View */
 
+/* Products Detail View */
 #detail-image{
     border-radius: 8px;
     height: 70vh;
     object-fit: cover;
 }
+
 
 /* Footer */
 footer{
@@ -79,4 +81,21 @@ footer{
 
 .buffer{
     height: 100px;
+}
+
+
+/* Toasts */
+.message-container{
+    position: fixed;
+    top: 100px;
+    right: 50px;
+    z-index: 99;
+}
+
+.custom-toast{
+    overflow: visible;
+}
+
+.toast-runner{
+    height: 2px
 }
