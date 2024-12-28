@@ -2,6 +2,8 @@ a, p{
     font-family: "Geist", serif;
 }
 
+/* Logo */
+
 .logo{
     font-size: 3rem;
     min-height: fit-content;
@@ -19,6 +21,30 @@ a, p{
 .dropdown-item, .nav-link, .anchor-text{
     color: black;
 }
+
+.background{
+    background:url('/media/home-image-off.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+.index-title{
+    position: relative;
+    left: 10vw;
+    top: 10vh;
+    background-color: orange;
+    padding: 0.5rem;
+    width: 90vw;
+}
+
+@media screen and (min-width: 768px){
+    .background{
+        background-position: center top;
+    }
+}
+
 
 /* Products List View */
 
@@ -43,7 +69,7 @@ footer{
     max-height: 100px;
     bottom: 0px;
     width: 100%;
-    background: #F5EFFF;
+    background: whitesmoke;
 }
 
 .social-link{
