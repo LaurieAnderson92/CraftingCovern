@@ -2,69 +2,70 @@
 
 {% load static %}
 
-<div class="container">
-    <div class="row">
-        <div class="col">
-
-        </div>
-    </div>
-</div>
-
 
 {% block content %}
-<div class="row mt-5">
-    <div class="col-4 offset-2">
-        <p>Please fill out the form below to complete your order</p>
+<div class="row mt-5 justify-content-center">
+    <div class="col-10"><p>You are ordering a bespoke <strong>{{ product.name }}</strong> Please fill out the form below to complete your order</p></div>
+    <div class="col-10 col-lg-5">
+        <img class="card-img-bottom" id="detail-image" src=" {{ product.image.url }}"
+            alt="{{ product.name }}">
+    </div>
+    <div class="col-12 col-lg-5 offset-1 offset-lg-0 ">
         <form action="#" method="POST" id="payment-form">
             {% csrf_token %}
-            <fieldset class="rounded">
+            <fieldset class="">
                 <legend class="small">Your Details</legend>
                 {{ order_form.full_name | as_crispy_field }}
                 {{ order_form.email | as_crispy_field }}
-            </fieldset>
-            <fieldset class="rounded"></fieldset>
-                <legend class="small">Package Details</legend>
                 {{ order_form.phone_number | as_crispy_field }}
-                {{ order_form.country | as_crispy_field }}
-                {{ order_form.postcode | as_crispy_field }}
-                {{ order_form.town_or_city | as_crispy_field }}
+            </fieldset>
+            <br>
+            <fieldset class="">
+                <legend class="small">Package Details</legend>
                 {{ order_form.street_address1 | as_crispy_field }}
                 {{ order_form.street_address2 | as_crispy_field }}
+                {{ order_form.town_or_city | as_crispy_field }}
                 {{ order_form.county | as_crispy_field }}
+                {{ order_form.country | as_crispy_field }}
+                {{ order_form.postcode | as_crispy_field }}
+            </fieldset>
+            <br>
+            <fieldset>
+                <legend class="small">Customization</legend>
                 {{ order_form.customisation | as_crispy_field }}
-                <div class="form-check form-check-inline float-right mr-0">
-                    {% if user.is_authenticated %}
-                        <label class="form-check-label" for="id-save-info">Save this delivery information to my profile</label>
-                        <input class="form-check-input ml-2 mr-0" type="checkbox" id="id-save-info" name="save-info" checked>
-                    {% else %}
-                        <label class="form-check-label" for="id-save-info">
-                            <a class="text-info" href="{% url 'account_signup' %}">Create an account</a> or 
-                            <a class="text-info" href="{% url 'account_login' %}">login</a> to save this information
-                        </label>
-                    {% endif %}
+            </fieldset>
+            <br>
+            <fieldset class="">
+                <div class="row">
+                    <div class="col-3">
+                        <div class="small">Item Cost: </div>
+                        <div class="small">Delivery: </div>
+                        <hr>
+                        <div class="small"><strong>Total Charge: </strong></div>
+                    </div>
+                    <div class="col-3">
+                        <div class="small">£{{ product.cost }}</div>
+                        <div class="small">£{{ delivery_cost }} </div>
+                        <hr>
+                        <div class="small"><strong>£{{ grand_total }}</strong></div>
+                    </div>
                 </div>
-            <fieldset class="rounded">
-                <legend class="small">Payment Details</legend>
-
+                <br>
+                <div class="border p-3">
                 <!-- A Stripe card element -->
                 <div id="card-element"></div>
-
                 <!-- Display form errors -->
                 <div class="text-danger" id="card-errors"></div>
+                </div>
             </fieldset>
-            <button id="submit-button" class="btn btn-black rounded-0">
+            <br>
+            <button id="submit-button" class="btn btn-dark mb-4">
                 <span class="font-weight-bold">Complete Order</span>
                 <span class="icon">
                     <i class="fas fa-lock"></i>
                 </span>
             </button>
         </form>
-    </div>
-    <div class="col-4">
-        <img class="card-img-bottom" src=" {{ product.image.url }}"
-            alt="{{ product.name }}">
-        <h1>{{ product.name }}</h1>
-        <h2>£{{ product.cost }}</h2>
     </div>
 </div>
 {% endblock content %}

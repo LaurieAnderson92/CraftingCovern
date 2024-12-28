@@ -67,8 +67,9 @@ def checkout(request, id):
             'product': product,
             'stripe_public_key': stripe_public_key,
             'client_secret': intent.client_secret,
+            'delivery_cost': delivery_cost,
+            'grand_total': grand_total,
         }
-
     return render(request, template, context)
 
 def checkout_success(request, order_number):
