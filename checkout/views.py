@@ -4,6 +4,7 @@ from django.contrib import messages
 
 from.forms import OrderForm
 from products.models import Product
+from users.models import Profile
 from .models import Order
 
 import stripe
@@ -14,12 +15,14 @@ def checkout(request, id):
 
     query = Profile.objects.all()
     profile_id = request.user.pk
-    profile = get_object_or_404(query, auth_user_id=profile_id)
+    order_form = OrderForm()
 
     try:
         product = Product.objects.get(id=id)
-    except Product.DoesNotExist:
+
+    except:
         messages.error(request, f'The product could not be found, please contact an administrator ')
+        return redirect(reverse('product_all'))
 
     product_cost = product.cost
     tenpercernt = product_cost/10
@@ -32,6 +35,12 @@ def checkout(request, id):
 
     grand_total = product_cost + delivery_cost
     stripe_total = round(grand_total * 100)
+    stripe.api_key = stripe_secret_key
+    intent = stripe.PaymentIntent.create(
+        amount=stripe_total,
+        currency=settings.STRIPE_CURRENCY,
+        )
+    template = "checkout/checkout.html"
 
     if request.method == 'POST':
         product = Product.objects.get(id=id)
@@ -59,15 +68,9 @@ def checkout(request, id):
         else:
             messages.error(request, f'An Error has occurred, your card has not been charged.')
     else:
-        stripe.api_key = stripe_secret_key
-        intent = stripe.PaymentIntent.create(
-        amount=stripe_total,
-        currency=settings.STRIPE_CURRENCY,
-        )
-
-        order_form = OrderForm()
-        template = "checkout/checkout.html"
-        context = {
+        try:
+            profile = get_object_or_404(query, auth_user_id=profile_id)
+            context = {
             'order_form': order_form,
             'product': product,
             'stripe_public_key': stripe_public_key,
@@ -75,7 +78,17 @@ def checkout(request, id):
             'delivery_cost': delivery_cost,
             'grand_total': grand_total,
             'profile': profile
-        }
+            }
+        except:
+            context = {
+            'order_form': order_form,
+            'product': product,
+            'stripe_public_key': stripe_public_key,
+            'client_secret': intent.client_secret,
+            'delivery_cost': delivery_cost,
+            'grand_total': grand_total,
+            }
+
     return render(request, template, context)
 
 def checkout_success(request, order_number):
