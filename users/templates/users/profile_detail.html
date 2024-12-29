@@ -44,29 +44,6 @@
         <button type="submit">Sign up</button>
     </form>
     {% endif %}
-    {% if profile.is_admin%}
-    <h3>Manage Subscriptions</h3>
-    <table>
-        <thead>
-            <tr>
-                <th>Email</th>
-                <th>Subscribed On</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for recipient in recipients %}
-            <tr>
-                <td>{{ recipient.email }}</td>
-                <td>{{ recipient.subscribed_on }}</td>
-                <td>
-                  <a href="{% url 'newsletter_delete' recipient.id %}">Unsubscribe</a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-{% endif %}
   </div>
 </div>
 {% endblock content %}
