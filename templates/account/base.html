@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row justify-content-sm-center justify-content-start align-content-start pt-5 background">
+  <div class="col-8 col-md-6 bg-dark text-white rounded-3 p-2">
+    {% block auth_form %}
+    {% endblock %}
+    {% block extra_body %}
+    {% endblock %}
+  </div>
+
+</div>
+{% endblock %}
