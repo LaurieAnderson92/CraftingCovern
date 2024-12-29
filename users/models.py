@@ -19,3 +19,14 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.full_name
+
+
+class Newsletter(models.Model):
+    profile = models.OneToOneField(
+        Profile, on_delete=models.CASCADE, related_name="profile"
+    )
+    email = models.EmailField(unique=True)
+    subscribed_on = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.email

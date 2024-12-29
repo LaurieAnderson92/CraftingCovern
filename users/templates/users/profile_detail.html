@@ -1,20 +1,72 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="row mt-5">
-
-  <div class="col-4 offset-4">
-    <h1>{{ profile.first_name }} {{ profile.last_name }}</h1>
-    <h2>{{ profile.auth_user.email }}</h2>
+<div class="row mt-3 justify-content-center">
+  <div class="col-8">
+    <h1>{{ profile.full_name }}</h1>
     {% if profile.is_admin == True %}
-    <p>Admin</p>
+    <span class="small">Admin, </span> 
     {% endif %}
     {% if profile.is_crafter == True %}
-    <p>Crafter</p>
+    <span class="small">Crafter, </span>
     {% endif %}
-    {% if profile.is_crafter != True and profile.is_admin != True %}
-    <p>User</p>
+    <h2>Orders</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Order #</th>
+          <th scope="col">Product</th>
+          <th scope="col">Date ordered</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for order in orders %}
+        <tr>
+          <th scope="row">{{ order.order_number }}</th>
+          <td>{{ order.product.name }}</td>
+          <td>{{order.date}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <h2>Newsletter Management</h2>
+    {% if already_regsistered == True  %}
+      <form method="post">
+        {% csrf_token %}
+        {{ form.email | as_crispy_field }}
+        <button type="submit">Edit Email</button>
+      </form>
+      <a href="{% url 'newsletter_delete' already_regsistered_id %}">Unsubscribe</a>
+    {% else %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.email | as_crispy_field }}
+        <button type="submit">Sign up</button>
+    </form>
     {% endif %}
+    {% if profile.is_admin%}
+    <h3>Manage Subscriptions</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th>Subscribed On</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for recipient in recipients %}
+            <tr>
+                <td>{{ recipient.email }}</td>
+                <td>{{ recipient.subscribed_on }}</td>
+                <td>
+                  <a href="{% url 'newsletter_delete' recipient.id %}">Unsubscribe</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
   </div>
 </div>
 {% endblock content %}

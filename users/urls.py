@@ -18,4 +18,5 @@ from . import views
 
 urlpatterns = [
     path('profile/<int:id>/', views.profile_detail, name='profile_detail'),
+    path('profile/newsletter/delete/<int:pk>/', views.newsletter_delete, name='newsletter_delete'),
 ]
