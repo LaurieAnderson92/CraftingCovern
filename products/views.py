@@ -18,6 +18,9 @@ def index(request):
 
 # Uses Django Generic list view
 def product_list(request):
+    query = Profile.objects.all()
+    profile_id = request.user.pk
+    profile = get_object_or_404(query, auth_user_id=profile_id)
 
     products = Product.objects.filter(deleted_on=None)
     query = None
@@ -59,6 +62,7 @@ def product_list(request):
         'query': query,
         'current_categories': categories,
         'current_sorting': current_sorting,
+        'profile': profile,
     }
 
     return render(
@@ -74,7 +78,6 @@ def product_detail(request, id):
 
     queryset_product = Product.objects.all()
     product = get_object_or_404(queryset_product, id=id)
-
     try: 
         profile = Profile.objects.get(auth_user_id=auth_user_id)
         return render(
@@ -95,7 +98,10 @@ def product_detail(request, id):
         )
 
 def product_new(request):
-    
+    query = Profile.objects.all()
+    profile_id = request.user.pk
+    profile = get_object_or_404(query, auth_user_id=profile_id)
+
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES)
         if form.is_valid:
@@ -110,12 +116,17 @@ def product_new(request):
     template = 'products/product_add.html'
     context = {
         'form': form,
+        'profile': profile,
     }
 
     return render(request, template, context)
 
 def product_edit(request, id):
     product = get_object_or_404(Product, pk=id)
+
+    query = Profile.objects.all()
+    profile_id = request.user.pk
+    profile = get_object_or_404(query, auth_user_id=profile_id)
 
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES, instance=product)
@@ -132,6 +143,7 @@ def product_edit(request, id):
     context = {
     'form': form,
     "product": product,
+    'profile': profile,
     }
 
     return render(request, template, context)

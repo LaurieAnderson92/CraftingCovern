@@ -57,16 +57,20 @@ def profile_detail(request, id):
     )
 
 def newsletter_delete(request, pk):
-    profile = request.user.pk
+    profile_id = request.user.pk
     recipient = get_object_or_404(Newsletter, pk=pk)
     recipient.delete()
     messages.success(request, "Successfully unsubscribed.")
-    return redirect ('profile_detail', profile)
+    return redirect ('profile_detail', profile_id)
 
 def newsletter_list(request):
+    query = Profile.objects.all()
+    profile_id = request.user.pk
+    profile = get_object_or_404(query, auth_user_id=profile_id)
     recipients = Newsletter.objects.all().order_by('-subscribed_on')
     context = {
-        'recipients': recipients
+        'recipients': recipients,
+        'profile': profile,
     }
     return render(
         request,
