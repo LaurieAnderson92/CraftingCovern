@@ -1,5 +1,6 @@
 from django.shortcuts import render, reverse, redirect, get_object_or_404
 from django.conf import settings
+from django.contrib import messages
 
 from.forms import OrderForm
 from products.models import Product
@@ -14,7 +15,7 @@ def checkout(request, id):
     try:
         product = Product.objects.get(id=id)
     except Product.DoesNotExist:
-        print("Need an Error Message")
+        messages.error(request, f'The product could not be found, please contact an administrator ')
 
     product_cost = product.cost
     tenpercernt = product_cost/10
@@ -52,7 +53,7 @@ def checkout(request, id):
             order = order_form.save()
             return redirect(reverse('checkout_success', args=[order.order_number]))
         else:
-            print("Order not valid")
+            messages.error(request, f'An Error has occurred, your card has not been charged.')
     else:
         stripe.api_key = stripe_secret_key
         intent = stripe.PaymentIntent.create(
@@ -81,4 +82,5 @@ def checkout_success(request, order_number):
     context = {
         'order': order
     }
+    messages.success(request, f'Your order of ' + order.product.name + ' has been placed.')
     return render(request, template, context)

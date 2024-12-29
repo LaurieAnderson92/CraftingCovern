@@ -100,8 +100,10 @@ def product_new(request):
         form = ProductForm(request.POST, request.FILES)
         if form.is_valid:
             form.save()
-            messages.success(request, f'Added this product to the catalogue')
+            messages.success(request, f'Added the Product to the catalogue')
             return redirect(reverse('product_all'))
+        else:
+            messages.error(request, f'Please check the data and try again, if this problem persists please contact an administrator')
     else:
         form = ProductForm()
 
@@ -121,6 +123,8 @@ def product_edit(request, id):
             form.save()
             messages.success(request, f'You hare successfully edited: ' + product.name)
             return redirect('product_detail', id)
+        else:
+            messages.error(request, f'Please check the data and try again, if this problem persists please contact an administrator')
     else:
         form = ProductForm(instance=product)
         
@@ -137,5 +141,6 @@ def product_delete(request, id):
 
     product.deleted_on = now()
     product.save()
+    messages.info(request, f'The product has been deleted.')
     return redirect(reverse('product_all'))
     
