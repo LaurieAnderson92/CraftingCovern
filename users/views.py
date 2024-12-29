@@ -29,14 +29,17 @@ def profile_detail(request, id):
             'profile': profile_id
         }
         form = NewsletterSignupForm(form_data)
-        if form.is_valid():
-            if already_regsistered:
-                form.save()
-                messages.sucess(request, "Email updated successfully.")
-            else:
-                form = NewsletterSignupForm(form_data, instance=newsletter_recipients.get(pk=already_regsistered_id))
-                form.save()
-                messages.success(request, "Thank you for subscribing!")
+        if already_regsistered:
+            form = NewsletterSignupForm(form_data, instance=newsletter_recipients.get(pk=already_regsistered_id))
+            print("Editing")
+            form.save()
+            messages.success(request, "Email updated successfully.")
+        elif form.is_valid():
+            print("Adding")
+            form.save()
+            messages.success(request, "Thank you for subscribing!")
+        else:
+            print("Not Valid")
     else:
         form = NewsletterSignupForm()
     
