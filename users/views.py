@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, get_object_or_404, HttpResponseRedirect, redirect
+from django.shortcuts import render, get_object_or_404, HttpResponseRedirect, redirect, reverse
 from django.contrib import messages
 
 from .models import Profile, Newsletter
@@ -33,28 +33,33 @@ def profile_detail(request, id):
             form = NewsletterSignupForm(form_data, instance=newsletter_recipients.get(pk=already_regsistered_id))
             form.save()
             messages.success(request, "Email updated successfully.")
+            return HttpResponseRedirect(request.path_info)
         elif form.is_valid():
             form.save()
             messages.success(request, "Thank you for subscribing!")
+            return HttpResponseRedirect(request.path_info)
+            
         else:
             messages.error(request, "Something went wrong, please contact us if the issue persists")
     else:
-        form = NewsletterSignupForm()
+        if profile_id == request.user.id:
+            form = NewsletterSignupForm()
+            context = {
+                'profile': profile,
+                'orders': orders,
+                'form': form,
+                'already_regsistered': already_regsistered,
+                'already_regsistered_id': already_regsistered_id
+            }
+            return render(
+                request,
+                'users/profile_detail.html',
+                context
+            )
+        else:
+            messages.warning(request, f'You do not have permission to access this page')
+            return redirect(reverse('product_all'))
     
-    context = {
-        'profile': profile,
-        'orders': orders,
-        'form': form,
-        'recipients': newsletter_recipients,
-        'already_regsistered': already_regsistered,
-        'already_regsistered_id': already_regsistered_id
-    }
-    
-    return render(
-        request,
-        'users/profile_detail.html',
-        context
-    )
 
 def newsletter_delete(request, pk):
     profile_id = request.user.pk
