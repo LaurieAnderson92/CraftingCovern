@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.db.models.functions import Lower
 from django.utils.timezone import now
 from django.views.generic import CreateView
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.db.models import Q
 from django.contrib import messages
 
@@ -18,10 +18,6 @@ def index(request):
 
 # Uses Django Generic list view
 def product_list(request):
-    query = Profile.objects.all()
-    profile_id = request.user.pk
-    profile = get_object_or_404(query, auth_user_id=profile_id)
-
     products = Product.objects.filter(deleted_on=None)
     query = None
     categories = None
@@ -56,20 +52,36 @@ def product_list(request):
             products = products.filter(queries)
 
     current_sorting = f'{sort}_{direction}'
+    try:
+        query = Profile.objects.all()
+        profile_id = request.user.pk
+        profile = get_object_or_404(query, auth_user_id=profile_id)
+        context = {
+            'products': products,
+            'query': query,
+            'current_categories': categories,
+            'current_sorting': current_sorting,
+            'profile': profile,
+        }
 
-    context = {
-        'products': products,
-        'query': query,
-        'current_categories': categories,
-        'current_sorting': current_sorting,
-        'profile': profile,
-    }
+        return render(
+        request,
+        'products/product_list.html',
+        context,
+        )
+    except:
+        context = {
+            'products': products,
+            'query': query,
+            'current_categories': categories,
+            'current_sorting': current_sorting,
+        }
 
-    return render(
-    request,
-    'products/product_list.html',
-    context,
-    )
+        return render(
+        request,
+        'products/product_list.html',
+        context,
+        )
 
 def product_detail(request, id):
     """A View to return the detail page for a product"""
@@ -98,10 +110,6 @@ def product_detail(request, id):
         )
 
 def product_new(request):
-    query = Profile.objects.all()
-    profile_id = request.user.pk
-    profile = get_object_or_404(query, auth_user_id=profile_id)
-
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES)
         if form.is_valid:
@@ -114,45 +122,75 @@ def product_new(request):
         form = ProductForm()
 
     template = 'products/product_add.html'
-    context = {
-        'form': form,
-        'profile': profile,
-    }
 
-    return render(request, template, context)
+    try:
+        query = Profile.objects.all()
+        profile_id = request.user.pk
+        profile = get_object_or_404(query, auth_user_id=profile_id)
+        if profile.is_crafter:
+            context = {
+                'form': form,
+                'profile': profile,
+            }
+            return render(request, template, context)
+        else:
+            messages.warning(request, f'Your account does not have permission to access this page')
+            return redirect(reverse('product_all'))
+    except:
+        messages.warning(request, f'You do not have permission to access this page')
+        return redirect(reverse('product_all'))
 
 def product_edit(request, id):
     product = get_object_or_404(Product, pk=id)
 
     query = Profile.objects.all()
     profile_id = request.user.pk
-    profile = get_object_or_404(query, auth_user_id=profile_id)
-
-    if request.method == 'POST':
-        form = ProductForm(request.POST, request.FILES, instance=product)
-        if form.is_valid:
-            form.save()
-            messages.success(request, f'You hare successfully edited: ' + product.name)
-            return redirect('product_detail', id)
+    try:
+        profile = get_object_or_404(query, auth_user_id=profile_id)
+        if request.method == 'POST':
+            form = ProductForm(request.POST, request.FILES, instance=product)
+            if form.is_valid:
+                form.save()
+                messages.success(request, f'You hare successfully edited: ' + product.name)
+                return redirect('product_detail', id)
+            else:
+                messages.error(request, f'Please check the data and try again, if this problem persists please contact an administrator')
         else:
-            messages.error(request, f'Please check the data and try again, if this problem persists please contact an administrator')
-    else:
-        form = ProductForm(instance=product)
-        
-    template = 'products/product_edit.html'
-    context = {
-    'form': form,
-    "product": product,
-    'profile': profile,
-    }
+            if profile.is_crafter:
+                form = ProductForm(instance=product)
+                template = 'products/product_edit.html'
+                context = {
+                'form': form,
+                "product": product,
+                'profile': profile,
+                }
 
-    return render(request, template, context)
+                return render(request, template, context)
+            elif profile.is_crafter == False:
+                messages.warning(request, f'Your account does not have permission to access this page')
+                return redirect(reverse('product_all'))
+    except:
+        messages.warning(request, f'You do not have permission to access this page')
+        return redirect(reverse('product_all'))
 
 def product_delete(request, id):
-    product = get_object_or_404(Product, pk=id)
+    query = Profile.objects.all()
+    profile_id = request.user.pk
+    try:
+        profile = get_object_or_404(query, auth_user_id=profile_id)
+        if profile.is_crafter:
+            product = get_object_or_404(Product, pk=id)
+            product.deleted_on = now()
+            product.save()
+            messages.info(request, f'The product has been deleted.')
+            return redirect(reverse('product_all'))
+        else:
+            messages.warning(request, f'Your account does not have permission to access this page')
+            return redirect(reverse('product_all'))
+    except:
+        messages.warning(request, f'You do not have permission to access this page')
+        return redirect(reverse('product_all'))
 
-    product.deleted_on = now()
-    product.save()
-    messages.info(request, f'The product has been deleted.')
-    return redirect(reverse('product_all'))
-    
+
+def page_not_found(request, exception):
+    return render(request, '404.html', status=404)
