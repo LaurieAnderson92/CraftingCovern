@@ -54,8 +54,13 @@
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa-solid fa-wrench"></i></a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="{% url 'product_create' %}">Add a Product</a>
                             <a class="dropdown-item" href="{% url 'profile_detail' user.pk %}">Profile</a>
+                            {% if profile.is_crafter == True %}
+                            <a class="dropdown-item" href="{% url 'product_create' %}">Add a Product</a>
+                            {% endif %}
+                            {% if profile.is_admin == True %}
+                            <a class="dropdown-item" href="{% url 'newsletter_list' %}">Newsletter list</a>
+                            {% endif %}
                         </div>
                     </li>
                     {% endif %}

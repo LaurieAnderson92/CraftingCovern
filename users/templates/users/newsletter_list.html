@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="row col-10 justify-content-center">
+    <h2 class="my-3">Manage Newsletter Subscriptions</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Email</th>
+          <th scope="col">Subscribed On</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for recipient in recipients %}
+        <tr>
+            <td>{{ recipient.email }}</td>
+            <td>{{ recipient.subscribed_on }}</td>
+            <td>
+              <a href="{% url 'newsletter_delete' recipient.id %}">Unsubscribe</a>
+            </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+</div>
+{% endblock content %}

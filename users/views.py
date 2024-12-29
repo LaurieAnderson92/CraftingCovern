@@ -31,15 +31,13 @@ def profile_detail(request, id):
         form = NewsletterSignupForm(form_data)
         if already_regsistered:
             form = NewsletterSignupForm(form_data, instance=newsletter_recipients.get(pk=already_regsistered_id))
-            print("Editing")
             form.save()
             messages.success(request, "Email updated successfully.")
         elif form.is_valid():
-            print("Adding")
             form.save()
             messages.success(request, "Thank you for subscribing!")
         else:
-            print("Not Valid")
+            messages.error(request, "Something went wrong, please contact us if the issue persists")
     else:
         form = NewsletterSignupForm()
     
@@ -64,3 +62,14 @@ def newsletter_delete(request, pk):
     recipient.delete()
     messages.success(request, "Successfully unsubscribed.")
     return redirect ('profile_detail', profile)
+
+def newsletter_list(request):
+    recipients = Newsletter.objects.all().order_by('-subscribed_on')
+    context = {
+        'recipients': recipients
+    }
+    return render(
+        request,
+        'users/newsletter_list.html',
+        context
+    )
