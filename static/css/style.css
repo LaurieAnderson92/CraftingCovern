@@ -23,6 +23,13 @@ a, p{
 }
 
 
+/* Header - Profile */
+.display-name{
+    font-size: medium;
+    font-weight: 100;
+    padding: 0.5rem 1rem;
+}
+
 /* Index Page */
 .background{
     background:url('/media/home-image-off.jpg');
