@@ -1,5 +1,4 @@
 {% load static %}
-
 {% url 'account_login' as login_url %}
 {% url 'account_signup' as signup_url %}
 {% url 'account_logout' as logout_url %}
@@ -55,6 +54,7 @@
                 <ul class="nav">
                     {% if user.is_authenticated %}
                     <li class="nav-item">
+                        
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Welcome {{user.username}}</a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="{% url 'profile_detail' user.pk %}">Profile</a>
@@ -91,7 +91,9 @@
         <!-- Product Navigation Bar -->
         <nav class="col-12">
             <ul class="nav nav-tabs justify-content-center">
-                <a class="nav-link" href="{% url 'product_all' %}" role="button" aria-haspopup="true" aria-expanded="false">All Products</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="{% url 'product_all' %}" role="button" aria-haspopup="true" aria-expanded="false">All Products</a>
+                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Enchant Your Familair</a>
                     <div class="dropdown-menu">
@@ -146,14 +148,14 @@
         <!-- footer -->
         <div class="container-fluid">
             <p class="p-2 text-center">Check out our Socials | 
-              <a href="https://discord.gg/cnxeu4kUtW" target="_blank" rel="noopener" aria-label="visit the Discord server (opens in a new tab)"
-              class="social-link">
+            <a href="https://discord.gg/cnxeu4kUtW" target="_blank" rel="noopener" aria-label="visit the Discord server (opens in a new tab)"
+            class="social-link">
                 <i class="fa-brands fa-discord px-3"></i>
-              </a>
-              <a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="visit the Youtube Channel (opens in a new tab)"
-              class="social-link">
+            </a>
+            <a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="visit the Youtube Channel (opens in a new tab)"
+            class="social-link">
                 <i class="fa-brands fa-facebook px-2"></i>
-              </a>
+            </a>
             </p>
             <p class="text-right m-0">© 2024 Copyright | Fullstack Anderson</p>
         </div>
@@ -172,9 +174,6 @@
     {% endblock %}
 
     {% block postloadjs %}
-    <script>
-        $('.toast').toast('show');
-    </script>
+    <script>$('.toast').toast('show')</script>
     {% endblock %}
-</body>
-</html>
+</body></html>
