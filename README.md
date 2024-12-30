@@ -292,7 +292,11 @@ I have been mindful during coding to ensure that the website is as accessible as
 
 #### robots.txt
 
+The robots.txt can be found [here](/robots.txt)
+
 #### Sitemap.xml
+
+The sitemap can be found [here](/sitemap.xml)
 
 #### Keywords
 
