@@ -6,9 +6,9 @@ I built this website to facilitate bespoke crafting creations made by the extrem
 
 All of the crafters are hobbyists who make things for the love of crafting. None of them express a desire to make this a full time and main source of income and instead want a tool to augment their current volume.
 
-![A picture of the Spellsmith Homepage](assets/documentation/cc_index.png)
+![A picture of the CovenCraft Homepage](assets/documentation/cc_index.jpg)
 
-[View SpellSmith on Heroku here](https://covencrafts-41bf1dffbe2d.herokuapp.com/)
+[View CovenCraft on Heroku here](https://covencrafts-41bf1dffbe2d.herokuapp.com/)
 
 ---
 
@@ -84,7 +84,7 @@ Key Features
 ## Design
 ### Colour Scheme
 
-![Colour Palette of Whitesmoke, Alabaster, Amber, Onyx and Eerie Black](assets/documentation/colourpalette.png)
+![Colour Palette of Whitesmoke, Alabaster, Amber, Onyx and Eerie Black](assets/documentation/colourpalette.jpeg)
 
 #### F5F5F5 | Whitesmoke 
 * I used Whitesmoke as a offwhite colour as the background for the page, as #FFFFFF has a very sterile and clinical feel to it, and this muted white has a matt loock that contrasts with Amber and Onyx
@@ -113,9 +113,9 @@ I used Geist for a simple, clean look that's sans serif so it'll be eaiser to re
 
 ### Wireframes
 
-![A wireframe of the Index page](assets/documentation/wireframe_index.png)
-![A wireframe of the product List ](assets/documentation/wireframe_list.png)
-![A wireframe of the product Detail](assets/documentation/wireframe_detail.png)
+![A wireframe of the Index page](assets/documentation/wireframe_index.jpeg)
+![A wireframe of the product List ](assets/documentation/wireframe_list.jpeg)
+![A wireframe of the product Detail](assets/documentation/wireframe_detail.jpeg)
 
 ### ERD
 
@@ -194,36 +194,54 @@ The website is comprised of a index page, a product list page, a product detail 
 All pages on the website are responsive and have:
 
 * A favicon in the browser tab.  
-![Image of the favicon](assets/documentation/features_favicon.png)
+![Image of the favicon](assets/documentation/features_favicon.jpeg)
 
 * A navigation bar alonside a text based logo, which also acts as a link to the homepage as per convention.  
-![Image of the Navigation bar](assets/documentation/features_navbar.png)
-
-* Highlighted links with a onbrand purple colour.  
-![Image of a Highlighted link](assets/documentation/features_links.png)
+![Image of the Navigation bar](assets/documentation/features_navbar.jpeg)
 
 #### The Home Page
-![Screenshot of the homepage](assets/documentation/features_homepage.png)  
-The homepage of the SpellSmith website displays the list of spells that the community has created, alongside the spells that the Dungeon Coach has officially released, it's paginated to display 12 spells at a time.
+![Screenshot of the homepage](assets/documentation/features_homepage.jpeg)  
+The Homepage of the CovenCrafts website displays the cover photo, setting out the imedate theme for the products that you will find inside.
 
-#### Spell Detail Page
-![Screenshot of the spell Detail page](assets/documentation/features_detailpage.png)  
-Clicking on a spell detail page will display all of the mecanics of the spell, in the style similar to the DC20 spellblock in the free rules pdf.
+#### The Product List Page
+![Screenshot of the product list page](assets/documentation/features_productlist.jpg)  
+The Product List of the CovenCrafts website displays the products that its crafters have created and are willing to create
 
-#### Create a Spell Page
-![Screenshot of the spell Detail page](assets/documentation/features_ca_spell.png)  
-Clicking The create a spell link will take you to a form with a POST method to the SQL Database; The form has Validation on the required fields that ensure the user is inputting data correctly into the database
+#### The Product Add Page
+![Screenshot of the homepage](assets/documentation/features_productadd.jpg)  
+The Product add page contains a form for Crafters and Site Admins of CovenCrafts can use to create a new product, either to add to their roster of things to craft for their fanbase, or for a on the fly commission.
+
+#### Product Detail Page
+![Screenshot of a spell Detail page](assets/documentation/features_productdetail.jpg)  
+Clicking on a Product detail page will display the cost of the product alongside its description and measurements. If the user is a crafter or an admin, they will also have the option to edit the product and delete it.
+
+#### Profile Page
+![Screenshot of a profile page](assets/documentation/features_profile.jpg)  
+This profile will list all orders a customer has made and had an option to sign up to a newsletter. if the user is an admin or a crafter it will display this.
+
+#### Checkout Page
+![Screenshot of a Checkout page](assets/documentation/features_checkout.jpg)  
 
 ### Future Implementations
 
-A list all future implementations can be found [here](https://github.com/users/LaurieAnderson92/projects/6/settings)  
+In The Future, I would like to implement as part of the next release:
 
-Currently what I'd like to add are 
+#### A Time Tracking method for crafters
+Have server side logic so that a Crafter can set the amount of time they have spare in the week, and have puchases track go against that time, to prevent a flurry of orders coming in above their supply. This has already been partially created, with each product listing how many hours it would take. and a crafters profile having how many hours they can do in a week plus how many hours they have spare.
 
-[#35](https://github.com/LaurieAnderson92/Spellsmith/issues/35)
-[#36](https://github.com/LaurieAnderson92/Spellsmith/issues/35)
-[#37](https://github.com/LaurieAnderson92/Spellsmith/issues/37)
-[#38](https://github.com/LaurieAnderson92/Spellsmith/issues/38)  
+#### Automated emails
+Emails that are sent out automatically when an order is placed, along with intergrating a newsletter 
+
+#### Webhooks with Stripe
+Webhooks to react when an order is placed.
+
+Furthjer down the Pipeline is would be:
+
+* A comment and review funtionality for each product
+* Site Traffic reporting
+* A way to apply bulk discounts.
+* A way to attribute each product to a crafter
+
 
 ### Accessibility
 
@@ -249,6 +267,7 @@ I have been mindful during coding to ensure that the website is as accessible as
 * [Git](https://git-scm.com/) - For version control.
 * [Github](https://github.com/) - To save and store the files in a could based repository.
 * [GitPod](https://www.gitpod.io/) - IDE used to create the site, access provided by CI.
+* [Stripe](https://stripe.com/gb) - the app that's powering my payment process
 * [Favicon.io](https://favicon.io/) -  To find and create a favicon.
 * [Phind](https://www.phind.com/search?home=true) - A AI based search engine to help me troubleshoot problems.
 * [Balsamiq](https://balsamiq.com/) - Used to create the wireframe.
@@ -269,31 +288,58 @@ I have been mindful during coding to ensure that the website is as accessible as
 
 ## Deployment & Local Development
 
+## SEO
+
+#### robots.txt
+
+#### Sitemap.xml
+
+#### Keywords
+
+* Cute witchy decor
+* Spooky amigurumi toys
+* Handmade Halloween gifts
+* Halloween home decor ideas
+* Witchy yarn crafts
+* Buy Crochet witch hat 
+* Halloween amigurumi animals
+* Halloween wall hanging ideas
+* Witchy crochet accessories
+* Spooky crochet ornaments
+* Crochet
+* Spooky Gifts
+* Yarn Gifts
+* Gifts
+* Handmade Gifts
+* Spooky Plushies
+
+
 ### Deployment
 
 Heroku was used to deploy the live website. The instructions to achieve this are below:
 
 * Go to Github.
-* Find the repository for this project and create a fork [here](https://github.com/LaurieAnderson92/Spellsmith)
+* Find the repository for this project and create a fork [here](https://github.com/LaurieAnderson92/CraftingCovern)
 * Login or sign up to Heroku
 * Click **New** > **Create New App**
 * Choose the app name and Region and click 'Create App'
 * Go to the 'Deploy' tab
 * Link up the forked github repoitory with the heroku app
 * Click **Deploy**
+* Navigate to Line 68 in base.html and replace the link with your new deployed link, followed by /admin/
 
 ### Local Development
 
 #### How to Fork
 
 * Log in (or sign up) to Github.
-* Find the repository for this project [here](https://github.com/LaurieAnderson92/Spellsmith)
+* Find the repository for this project [here](https://github.com/LaurieAnderson92/CraftingCovern)
 * Click the **Fork** button in the top right corner.
 
 #### How to Clone
 
 * Log in (or sign up) to GitHub.
-* Find the repository for this project [here](https://github.com/LaurieAnderson92/Spellsmith)
+* Find the repository for this project [here](https://github.com/LaurieAnderson92/CraftingCovern)
 * Click on the code button, select whether you would like to clone with HTTPS, SSH or GitHub CLI and copy the link shown.
 * Open the terminal in your code editor and change the current working directory to the location you want to use for the cloned directory.
 * Type 'git clone' into the terminal and then paste the link you copied in step 3. 
@@ -303,7 +349,7 @@ Heroku was used to deploy the live website. The instructions to achieve this are
 
 Please refer to this [TESTING](TESTING.md) file
 
-Issues that required me to stop and think and research the awnser were listed as BUGS which Can be found [here](https://github.com/users/LaurieAnderson92/projects/4/views/1?filterQuery=Bug)
+Issues that required me to stop and think and research the awnser were listed as BUGS which Can be found [here](https://github.com/users/LaurieAnderson92/projects/7/views/1?filterQuery=Bug)
 
 ## Credits
 
@@ -313,7 +359,7 @@ I used the code to paginate the spell detail page which was taken from the CI dj
 
 ### Content
 
-The Spells created by the super user were created by the Dungeon Coach which can be found [here](https://thedungeoncoach.com/pages/dc20-free-downloads)
+The Pictures Content was provided by my wonderful and talented friends or from pexels
 
 ###  Acknowledgments
 
@@ -321,39 +367,7 @@ The Spells created by the super user were created by the Dungeon Coach which can
 * My Fiancee Sophie, for being a endless rock during times of strive, even if they don't know it.
 * Kera Cudmore, for being a enless source of insperation with their designs and readmes and proving the foundational templates that my readmes are based on.
 * My loved ones in the GFR sever who push me further
-* To the Dungeon Coach for creating an amazing and inspiring system, please hurry up with 0.9
-* And to you.
-
-
-
-
-
-
-
-## SEO
-
-#### Keywords
-
-
-Cute witchy decor
-Spooky amigurumi toys
-Handmade Halloween gifts
-Halloween home decor ideas
-Witchy yarn crafts
-Buy Crochet witch hat 
-Halloween amigurumi animals
-Halloween wall hanging ideas
-Witchy crochet accessories
-Spooky crochet ornaments
-Crochet
-Spooky Gifts
-Yarn Gifts
-Gifts
-Handmade Gifts
-Spooky Plushies
-
-
-## Acknoledgements
+* And to you all at CI. I haven't got a mind for business and the like, and I'm not the most online shoping orientated. This was a good insight into building applications without that initial spark of passion. 
 
 #### Pexel Photos:
 
