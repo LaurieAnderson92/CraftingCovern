@@ -14,9 +14,21 @@ from users.models import Profile
 
 def index(request):
     """A view to Return the Index Page"""
-    return render(request, 'products/index.html')
+    try:
+        profile_query = Profile.objects.all()
+        print(profile_query)
+        profile_id = request.user.pk
+        print(profile_id)
+        profile = get_object_or_404(profile_query, auth_user_id=profile_id)
+        print(profile)
+        context = {
+            'profile': profile,
+        }
+        return render(request, 'products/index.html', context)
+    except:
+        print("except")
+        return render(request, 'products/index.html')
 
-# Uses Django Generic list view
 def product_list(request):
     products = Product.objects.filter(deleted_on=None)
     query = None
@@ -55,7 +67,7 @@ def product_list(request):
     try:
         profile_query = Profile.objects.all()
         profile_id = request.user.pk
-        profile = get_object_or_404(query, auth_user_id=profile_id)
+        profile = get_object_or_404(profile_query, auth_user_id=profile_id)
         context = {
             'products': products,
             'query': query,
