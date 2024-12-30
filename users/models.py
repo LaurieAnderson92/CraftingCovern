@@ -7,7 +7,7 @@ class Profile(models.Model):
     auth_user = models.OneToOneField(
         User, on_delete=models.CASCADE, related_name="auth_user", primary_key=True
     )
-    full_name = models.CharField(max_length=50, null=False, blank=False)
+    full_name = models.CharField(max_length=255, null=False, blank=False)
     is_crafter = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
     craft_time_commited = models.IntegerField(validators=[MinValueValidator(1)], null=True, blank=True)
