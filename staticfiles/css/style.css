@@ -32,7 +32,7 @@ a, p{
 
 /* Index Page */
 .background{
-    background:url('/media/home-image-off.jpg');
+    background:url('staticfiles/css/media/home-image-off.jpg');
     background-size: cover;
     background-position: center;
     height: calc(100vh - 100px);
