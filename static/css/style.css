@@ -71,6 +71,12 @@ a, p{
     object-fit: cover;
 }
 
+/* Profile Detail View */
+.newsletter-btn{
+    height: 30px;
+    align-self: flex-end;
+}
+
 
 /* Footer */
 footer{
