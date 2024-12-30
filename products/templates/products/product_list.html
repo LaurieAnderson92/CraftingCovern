@@ -7,7 +7,7 @@
         <div class="row mt-1 mb-2">
               <div class="col-12 col-md-6 my-auto d-flex justify-content-center justify-content-md-end">
                 <div class="w-50">
-                    <select id="sort-selector" class="custom-select custom-select-sm rounded-0 border border-{% if current_sorting != 'None_None' %}info{% else %}black{% endif %}">
+                    <select id="sort-selector" class="custom-select custom-select-sm rounded-0 border border-{% if current_sorting != 'None_None' %}info{% else %}black{% endif %}" aria-label="sort by">
                         <option value="reset" {% if current_sorting == 'None_None' %}selected{% endif %}>Sort by...</option>
                         <option value="cost_asc" {% if current_sorting == 'cost_asc' %}selected{% endif %}>Cost (low to high)</option>
                         <option value="cost_desc" {% if current_sorting == 'cost_desc' %}selected{% endif %}>Cost (high to low)</option>

@@ -41,7 +41,7 @@
                     <div class="input-group w-100">
                         <input class="form-control" type="text" name="q" placeholder="Search our site">
                         <div class="input-group-append">
-                            <button class="form-control btn btn-black border border-black rounded-0" type="submit">
+                            <button class="form-control btn btn-black border border-black rounded-0" type="submit" aria-label="search button">
                                 <span class="icon">
                                     <i class="fas fa-search"></i>
                                 </span>
@@ -54,7 +54,6 @@
                 <ul class="nav">
                     {% if user.is_authenticated %}
                     <li class="nav-item">
-                        
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Welcome {{user.username}}</a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="{% url 'profile_detail' user.pk %}">Profile</a>
