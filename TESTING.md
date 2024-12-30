@@ -161,7 +161,7 @@ Additional testing was taken by friends on a variety of devices and screen sizes
 | Editing a product | An admin or crafter should be able to edit a product via the button | edited a product | a instance of create a product was opened with data populated, when submitted the product was edited | Pass |
 
 
-#### Create a product page`
+#### Create a product page
 | Feature | Expected Outcome | Testing Performed | Result | Pass/Fail |
 | --- | --- | --- | --- | --- |
 | Creating a Product | The Crafter or Admin should be able to create a product via the form | created a product | product now exists | Pass |
@@ -173,5 +173,13 @@ Additional testing was taken by friends on a variety of devices and screen sizes
 | Feature | Expected Outcome | Testing Performed | Result | Pass/Fail |
 | --- | --- | --- | --- | --- |
 | Create a User | Able to create a user | followed instructions to create a user | User was created | Pass |
+| Login as a user | Able to login | followed instructions to login | User was authenticed | Pass |
+| Logout as a user | Able to logout | followed instructions to logout | User was signed out | Pass |
+
+#### Checkout
+
+| Feature | Expected Outcome | Testing Performed | Result | Pass/Fail |
+| --- | --- | --- | --- | --- |
+| Make a Purchase | Able to make a purchase | Entered test data for Stripe: 4242 4242 4242 4242 + any future dated expiary + Any CVC + any Zip | Order was created | Pass |
 | Login as a user | Able to login | followed instructions to login | User was authenticed | Pass |
 | Logout as a user | Able to logout | followed instructions to logout | User was signed out | Pass |
