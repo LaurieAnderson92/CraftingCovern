@@ -32,7 +32,7 @@ a, p{
 
 /* Index Page */
 .background{
-    background:url('staticfiles/css/media/home-image-off.jpg');
+    background:url('../media/home-image-off.jpg');
     background-size: cover;
     background-position: center;
     height: calc(100vh - 100px);
@@ -43,9 +43,9 @@ a, p{
     position: relative;
     left: 10vw;
     top: 10vh;
-    background-color: orange;
+    background-color: #FFBF00;
     padding: 0.5rem;
-    width: 90vw;
+    width: 60vw;
 }
 
 @media screen and (min-width: 768px){
