@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     {% endblock %}
 
-    <title>Crafting Covern</title>
+    <title>CovenCrafts</title>
 </head>
 <body>
     <header class="container-fluid">
@@ -51,10 +51,7 @@
                 <ul class="nav">
                     {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <h2 class="display-name m-0">Welcome {{user.username}}</h2>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa-solid fa-wrench"></i></a>
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Welcome {{user.username}}</a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="{% url 'profile_detail' user.pk %}">Profile</a>
                             {% if profile.is_crafter == True %}
@@ -141,7 +138,6 @@
 
     {% endblock content %}
 
-    <div class="buffer"></div>
     <footer class="">
         <!-- footer -->
         <div class="container-fluid">
@@ -155,7 +151,7 @@
                 <i class="fa-brands fa-facebook px-2"></i>
               </a>
             </p>
-            <p class="text-right">© 2024 Copyright | Fullstack Anderson</p>
+            <p class="text-right m-0">© 2024 Copyright | Fullstack Anderson</p>
         </div>
     </footer>
     {% block corejs %}
