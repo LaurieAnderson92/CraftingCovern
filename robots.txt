@@ -1,0 +1,3 @@
+User-agent:*
+Disallow:
+Sitemap:https://covencrafts-41bf1dffbe2d.herokuapp.com/sitemap.xml
