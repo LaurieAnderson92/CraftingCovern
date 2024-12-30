@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('checkout', '0003_auto_20241227_1354'),
+        ('checkout', '0001_initial'),
     ]
 
     operations = [
