@@ -75,6 +75,7 @@ a, p{
 .newsletter-btn{
     height: 30px;
     align-self: flex-end;
+    padding: 2px;
 }
 
 
