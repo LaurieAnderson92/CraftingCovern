@@ -53,7 +53,7 @@ def product_list(request):
 
     current_sorting = f'{sort}_{direction}'
     try:
-        query = Profile.objects.all()
+        profile_query = Profile.objects.all()
         profile_id = request.user.pk
         profile = get_object_or_404(query, auth_user_id=profile_id)
         context = {
