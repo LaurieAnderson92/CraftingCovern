@@ -30,9 +30,9 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['https://covencrafts-41bf1dffbe2d.herokuapp.com', 'localhost','.herokuapp.com']
 
-CSRF_TRUSTED_ORIGINS = ['https://8000-laurieander-craftingcov-kw8qer1r30r.ws.codeinstitute-ide.net']
+CSRF_TRUSTED_ORIGINS = ['https://8000-laurieander-craftingcov-kw8qer1r30r.ws.codeinstitute-ide.net','.herokuapp.com']
 
-CSRF_ALLOWED_ORIGINS = ['https://8000-laurieander-craftingcov-kw8qer1r30r.ws.codeinstitute-ide.net']
+CSRF_ALLOWED_ORIGINS = ['https://8000-laurieander-craftingcov-kw8qer1r30r.ws.codeinstitute-ide.net','.herokuapp.com']
 
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`

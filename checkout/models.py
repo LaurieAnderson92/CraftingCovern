@@ -11,7 +11,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Order(models.Model):
-
+    id = models.AutoField(primary_key=True)
     order_number = models.CharField(max_length=32, null=False, editable=False)
     customer = models.ForeignKey(
         User, null=True, blank=True, on_delete=models.SET_NULL, related_name="customer", 
