@@ -5,12 +5,13 @@ from .models import Order
 class OrderForm(forms.ModelForm):
     class Meta:
         model = Order
-        fields = ('customer', 'product','full_name', 
-                'email', 'phone_number',
-                'street_address1', 'street_address2',
-                'town_or_city', 'postcode', 'country',
-                'county', 'customisation', 'delivery_cost', 
-                'order_cost', 'grand_total',
+        fields = (
+                    'customer', 'product', 'full_name',
+                    'email', 'phone_number',
+                    'street_address1', 'street_address2',
+                    'town_or_city', 'postcode', 'country',
+                    'county', 'customisation', 'delivery_cost',
+                    'order_cost', 'grand_total',
                 )
 
     def __init__(self, *args, **kwargs):
@@ -31,7 +32,7 @@ class OrderForm(forms.ModelForm):
             'street_address1': 'Street Address 1',
             'street_address2': 'Street Address 2',
             'county': 'County',
-            'customisation': 'List any customizations you would like, such as colour or texture',
+            'customisation': 'List any customizations you would like',
             'delivery_cost': 'delivery_cost',
             'order_cost': 'order_cost',
             'grand_total': 'grand_total',

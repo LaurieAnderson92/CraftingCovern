@@ -12,22 +12,20 @@ from users.models import Profile
 
 # Create your views here.
 
+
 def index(request):
     """A view to Return the Index Page"""
     try:
         profile_query = Profile.objects.all()
-        print(profile_query)
         profile_id = request.user.pk
-        print(profile_id)
         profile = get_object_or_404(profile_query, auth_user_id=profile_id)
-        print(profile)
         context = {
             'profile': profile,
         }
         return render(request, 'products/index.html', context)
-    except:
-        print("except")
+    except Exception as e:
         return render(request, 'products/index.html')
+
 
 def product_list(request):
     products = Product.objects.filter(deleted_on=None)
@@ -59,7 +57,7 @@ def product_list(request):
             query = request.GET['q']
             if not query:
                 return redirect(reverse('product_all'))
-            
+
             queries = Q(name__icontains=query) | Q(description__icontains=query)
             products = products.filter(queries)
 
@@ -77,11 +75,11 @@ def product_list(request):
         }
 
         return render(
-        request,
-        'products/product_list.html',
-        context,
+            request,
+            'products/product_list.html',
+            context,
         )
-    except:
+    except Exception as e:
         context = {
             'products': products,
             'query': query,
@@ -90,10 +88,11 @@ def product_list(request):
         }
 
         return render(
-        request,
-        'products/product_list.html',
-        context,
+            request,
+            'products/product_list.html',
+            context,
         )
+
 
 def product_detail(request, id):
     """A View to return the detail page for a product"""
@@ -102,7 +101,7 @@ def product_detail(request, id):
 
     queryset_product = Product.objects.all()
     product = get_object_or_404(queryset_product, id=id)
-    try: 
+    try:
         profile = Profile.objects.get(auth_user_id=auth_user_id)
         return render(
             request,
@@ -112,7 +111,7 @@ def product_detail(request, id):
                 "profile": profile
             },
         )
-    except:
+    except Exception as e:
         return render(
             request,
             'products/product_detail.html',
@@ -120,6 +119,7 @@ def product_detail(request, id):
                 "product": product,
             },
         )
+
 
 def product_new(request):
     if request.method == 'POST':
@@ -129,7 +129,9 @@ def product_new(request):
             messages.success(request, f'Added the Product to the catalogue')
             return redirect(reverse('product_all'))
         else:
-            messages.error(request, f'Please check the data and try again, if this problem persists please contact an administrator')
+            messages.error(
+                request,
+                f'Please check the data and try again.')
     else:
         form = ProductForm()
 
@@ -146,11 +148,18 @@ def product_new(request):
             }
             return render(request, template, context)
         else:
-            messages.warning(request, f'Your account does not have permission to access this page')
+            messages.warning(
+                request,
+                f'Your account does not have permission to access this page'
+            )
             return redirect(reverse('product_all'))
-    except:
-        messages.warning(request, f'You do not have permission to access this page')
+    except Exception as e:
+        messages.warning(
+            request,
+            f'You do not have permission to access this page'
+        )
         return redirect(reverse('product_all'))
+
 
 def product_edit(request, id):
     product = get_object_or_404(Product, pk=id)
@@ -163,27 +172,39 @@ def product_edit(request, id):
             form = ProductForm(request.POST, request.FILES, instance=product)
             if form.is_valid:
                 form.save()
-                messages.success(request, f'You hare successfully edited: ' + product.name)
+                messages.success(
+                    request,
+                    f'You hare successfully edited: ' + product.name
+                    )
                 return redirect('product_detail', id)
             else:
-                messages.error(request, f'Please check the data and try again, if this problem persists please contact an administrator')
+                messages.error(
+                    request,
+                    f'Please check the data and try again.'
+                )
         else:
             if profile.is_crafter:
                 form = ProductForm(instance=product)
                 template = 'products/product_edit.html'
                 context = {
-                'form': form,
-                "product": product,
-                'profile': profile,
+                    'form': form,
+                    "product": product,
+                    'profile': profile,
                 }
-
                 return render(request, template, context)
-            elif profile.is_crafter == False:
-                messages.warning(request, f'Your account does not have permission to access this page')
+            elif profile.is_crafter is False:
+                messages.warning(
+                    request,
+                    f"Your account doesn't have permission to access this page"
+                )
                 return redirect(reverse('product_all'))
-    except:
-        messages.warning(request, f'You do not have permission to access this page')
+    except Exception as e:
+        messages.warning(
+            request,
+            f'You do not have permission to access this page'
+        )
         return redirect(reverse('product_all'))
+
 
 def product_delete(request, id):
     query = Profile.objects.all()
@@ -197,10 +218,16 @@ def product_delete(request, id):
             messages.info(request, f'The product has been deleted.')
             return redirect(reverse('product_all'))
         else:
-            messages.warning(request, f'Your account does not have permission to access this page')
+            messages.warning(
+                request,
+                f"Your account doesn't have permission to access this page"
+            )
             return redirect(reverse('product_all'))
-    except:
-        messages.warning(request, f'You do not have permission to access this page')
+    except Exception as e:
+        messages.warning(
+            request,
+            f'You do not have permission to access this page'
+        )
         return redirect(reverse('product_all'))
 
 

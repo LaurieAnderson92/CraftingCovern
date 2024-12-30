@@ -1,13 +1,13 @@
 from django.shortcuts import render, reverse, redirect, get_object_or_404
 from django.conf import settings
 from django.contrib import messages
-
-from.forms import OrderForm
 from products.models import Product
 from users.models import Profile
+import stripe
+
+from .forms import OrderForm
 from .models import Order
 
-import stripe
 
 def checkout(request, id):
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
@@ -19,9 +19,11 @@ def checkout(request, id):
 
     try:
         product = Product.objects.get(id=id)
-
-    except:
-        messages.error(request, f'The product could not be found, please contact an administrator ')
+    except Exception as e:
+        messages.error(
+            request,
+            f'The product could not be found, please contact an administrator'
+            )
         return redirect(reverse('product_all'))
 
     product_cost = product.cost
@@ -64,32 +66,37 @@ def checkout(request, id):
         order_form = OrderForm(form_data)
         if order_form.is_valid():
             order = order_form.save()
-            return redirect(reverse('checkout_success', args=[order.order_number]))
+            return redirect(
+                reverse('checkout_success', args=[order.order_number])
+                )
         else:
-            messages.error(request, f'An Error has occurred, your card has not been charged.')
+            messages.error(
+                request,
+                f'An Error has occurred, your card has not been charged.'
+                )
     else:
         try:
             profile = get_object_or_404(query, auth_user_id=profile_id)
             context = {
-            'order_form': order_form,
-            'product': product,
-            'stripe_public_key': stripe_public_key,
-            'client_secret': intent.client_secret,
-            'delivery_cost': delivery_cost,
-            'grand_total': grand_total,
-            'profile': profile
+                'order_form': order_form,
+                'product': product,
+                'stripe_public_key': stripe_public_key,
+                'client_secret': intent.client_secret,
+                'delivery_cost': delivery_cost,
+                'grand_total': grand_total,
+                'profile': profile
             }
-        except:
+        except Exception as e:
             context = {
-            'order_form': order_form,
-            'product': product,
-            'stripe_public_key': stripe_public_key,
-            'client_secret': intent.client_secret,
-            'delivery_cost': delivery_cost,
-            'grand_total': grand_total,
+                'order_form': order_form,
+                'product': product,
+                'stripe_public_key': stripe_public_key,
+                'client_secret': intent.client_secret,
+                'delivery_cost': delivery_cost,
+                'grand_total': grand_total,
             }
-
     return render(request, template, context)
+
 
 def checkout_success(request, order_number):
     """
@@ -105,5 +112,7 @@ def checkout_success(request, order_number):
         'order': order,
         'profile': profile,
     }
-    messages.success(request, f'Your order of ' + order.product.name + ' has been placed.')
+    messages.success(
+        request,
+        f'Your order of ' + order.product.name + ' has been placed.')
     return render(request, template, context)
