@@ -129,57 +129,57 @@ Each device tested the site using the following browsers:
 Additional testing was taken by friends on a variety of devices and screen sizes. They reported no issues when navigating the site.
 
 
-#### All Pages
+#### 1 All Pages
 
-| Feature | Expected Outcome | Testing Performed | Result | Pass/Fail |
-| --- | --- | --- | --- | --- |
-| The Company's logo               | Link directs the user back to the home page | Clicked logo | Home page reloads | Pass |
-| Navbar: Searchbar                | When inputted and entered, it should search all product names and descriptions | Searched for hats | returned q for hats | Pass |
-| Navbar: All Products             | Link directs the user to the product list page returning all products | Clicked on Anchor 'All Products' | Browser navigates to list view with all prodcts | Pass |
-| Navbar: Enchant your Familiar, Charm Your Outfit, Bewitch Your home| Link directs the user to the product list page returning products with assosiated catagores| Clicked on Anchors and below divs | Browser navigates to list view with filtered prodcts | Pass |
-| Navbar: Logout                   | Link directs the user to the logout page | Clicked on Anchor 'Logout' while logged in | Browser navigates to logout page | Pass |
-| Navbar: Register                 | Link directs the user to the Register page | Clicked on Anchor 'Register' while logged out | Browser navigates to register page | Pass |
-| Navbar: Login                    | Link directs the user to the login page | Clicked on Anchor 'Login' while logged out | Browser navigates to loh page | Pass |
-| Footer: social links             | Social buttons direct to matching socials in new tab | Clicked on social anchors | Opens the correct social page in a new tab | Pass |
-
-
-#### Product List
-
-| Feature | Expected Outcome | Testing Performed | Result | Pass/Fail |
-| --- | --- | --- | --- | --- |
-| Product cards linked | Link directs the user to the associated product's detail view | Clicked product card | Directed to product | Pass |
-| Pagnaite the view | The user should be able to click next and previous if there are more than 12 products | create 13 products and move back and forth between the pages | Next and Prev Buttons do not appear | Fail |
+| 1 | Feature | Expected Outcome | Testing Performed | Result | Pass/Fail |
+| - | --- | --- | --- | --- | --- |
+| 1.1 | The Company's logo               | Link directs the user back to the home page | Clicked logo | Home page reloads | Pass |
+| 1.2 | Navbar: Searchbar                | When inputted and entered, it should search all product names and descriptions | Searched for hats | returned q for hats | Pass |
+| 1.3 | Navbar: All Products             | Link directs the user to the product list page returning all products | Clicked on Anchor 'All Products' | Browser navigates to list view with all prodcts | Pass |
+| 1.4 | Navbar: Enchant your Familiar, Charm Your Outfit, Bewitch Your home| Link directs the user to the product list page returning products with assosiated catagores| Clicked on Anchors and below divs | Browser navigates to list view with filtered prodcts | Pass |
+| 1.5 | Navbar: Logout                   | Link directs the user to the logout page | Clicked on Anchor 'Logout' while logged in | Browser navigates to logout page | Pass |
+| 1.6 | Navbar: Register                 | Link directs the user to the Register page | Clicked on Anchor 'Register' while logged out | Browser navigates to register page | Pass |
+| 1.7 | Navbar: Login                    | Link directs the user to the login page | Clicked on Anchor 'Login' while logged out | Browser navigates to loh page | Pass |
+| 1.8 | Footer: social links             | Social buttons direct to matching socials in new tab | Clicked on social anchors | Opens the correct social page in a new tab | Pass |
 
 
-#### Product Detail 
+#### 2 Product List
 
-| Feature | Expected Outcome | Testing Performed | Result | Pass/Fail |
-| --- | --- | --- | --- | --- |
-| Product data returned on view | The view should display select fields from the product model | viewed product | All expected fields present, (Name, Image URL, Description, Dimensions, price) but formatting on the text fields not present | Partial Pass
-| Edit and Delete Buttons not visible unless logged in to a crafter or admin profile | The view shouldn't display the delete or edit buttons unless the user is logged in and they are viewing a product they created | viewed product while logged out | Buttons not present | Pass |
-| Deleting a product | An admin or crafter should be able to delete a product via the button | delete a product | product no longer exists, warning message was displayed first | Pass |
-| Editing a product | An admin or crafter should be able to edit a product via the button | edited a product | a instance of create a product was opened with data populated, when submitted the product was edited | Pass |
+| 2 | Feature | Expected Outcome | Testing Performed | Result | Pass/Fail |
+| - | --- | --- | --- | --- | --- |
+| 2.1 | Product cards linked | Link directs the user to the associated product's detail view | Clicked product card | Directed to product | Pass |
+| 2.2 | Pagnaite the view | The user should be able to click next and previous if there are more than 12 products | create 13 products and move back and forth between the pages | Next and Prev Buttons do not appear | Fail |
 
 
-#### Create a product page
-| Feature | Expected Outcome | Testing Performed | Result | Pass/Fail |
-| --- | --- | --- | --- | --- |
-| Creating a Product | The Crafter or Admin should be able to create a product via the form | created a product | product now exists | Pass |
-| Form validation | The form shouldn't submit if the field data is incorect and should guide the user to what needs to be changed | Tried to create a product with invalid data | form not submitted, error 500 presented | fail |
+#### 3 Product Detail 
+
+| 3 | Feature | Expected Outcome | Testing Performed | Result | Pass/Fail |
+| - | --- | --- | --- | --- | --- |
+| 3.1 | Product data returned on view | The view should display select fields from the product model | viewed product | All expected fields present, (Name, Image URL, Description, Dimensions, price) but formatting on the text fields not present | Partial Pass
+| 3.2 | Edit and Delete Buttons not visible unless logged in to a crafter or admin profile | The view shouldn't display the delete or edit buttons unless the user is logged in and they are viewing a product they created | viewed product while logged out | Buttons not present | Pass |
+| 3.3 | Deleting a product | An admin or crafter should be able to delete a product via the button | delete a product | product no longer exists, warning message was displayed first | Pass |
+| 3.4 | Editing a product | An admin or crafter should be able to edit a product via the button | edited a product | a instance of create a product was opened with data populated, when submitted the product was edited | Pass |
 
 
-#### Login
+#### 4 Create a product page
+| 4 | Feature | Expected Outcome | Testing Performed | Result | Pass/Fail |
+| - | --- | --- | --- | --- | --- |
+| 4.1 | Creating a Product | The Crafter or Admin should be able to create a product via the form | created a product | product now exists | Pass |
+| 4.2 | Form validation | The form shouldn't submit if the field data is incorect and should guide the user to what needs to be changed | Tried to create a product with invalid data | form not submitted, redirected back to the page | Pass |
 
-| Feature | Expected Outcome | Testing Performed | Result | Pass/Fail |
-| --- | --- | --- | --- | --- |
-| Create a User | Able to create a user | followed instructions to create a user | User was created | Pass |
-| Login as a user | Able to login | followed instructions to login | User was authenticed | Pass |
-| Logout as a user | Able to logout | followed instructions to logout | User was signed out | Pass |
+
+#### 5 Login
+
+| 5 | Feature | Expected Outcome | Testing Performed | Result | Pass/Fail |
+| - | --- | --- | --- | --- | --- |
+| 5.1 | Create a User | Able to create a user | followed instructions to create a user | User was created | Pass |
+| 5.2 | Login as a user | Able to login | followed instructions to login | User was authenticed | Pass |
+| 5.3 | Logout as a user | Able to logout | followed instructions to logout | User was signed out | Pass |
 
 #### Checkout
 
-| Feature | Expected Outcome | Testing Performed | Result | Pass/Fail |
-| --- | --- | --- | --- | --- |
-| Make a Purchase | Able to make a purchase | Entered test data for Stripe: 4242 4242 4242 4242 + any future dated expiary + Any CVC + any Zip | Order was created | Pass |
-| Login as a user | Able to login | followed instructions to login | User was authenticed | Pass |
-| Logout as a user | Able to logout | followed instructions to logout | User was signed out | Pass |
+| 6 | Feature | Expected Outcome | Testing Performed | Result | Pass/Fail |
+| - | --- | --- | --- | --- | --- |
+| 6.1 | Make a Purchase | Able to make a purchase | Entered test data for Stripe: 4242 4242 4242 4242 + any future dated expiary + Any CVC + any Zip | Order was created | Pass |
+| 6.2 |Login as a user | Able to login | followed instructions to login | User was authenticed | Pass |
+| 6.3 |Logout as a user | Able to logout | followed instructions to logout | User was signed out | Pass |

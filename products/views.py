@@ -125,9 +125,18 @@ def product_new(request):
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES)
         if form.is_valid:
-            form.save()
-            messages.success(request, f'Added the Product to the catalogue')
-            return redirect(reverse('product_all'))
+            try:
+                form.save()
+                messages.success(
+                    request,
+                    f'Added the Product to the catalogue'
+                )
+                return redirect(reverse('product_all'))
+            except Exception as e:
+                messages.error(
+                    request,
+                    f'Please check the data and try again.'
+                )
         else:
             messages.error(
                 request,
