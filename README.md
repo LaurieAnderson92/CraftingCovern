@@ -17,6 +17,10 @@ All of the crafters are hobbyists who make things for the love of crafting. None
 * [User Experience](#user-experience-ux)
   * [User Stories](#user-stories)
 
+* [Business Plan](#business-plan)
+
+* [Development](#development)
+
 * [Design](#design)
   * [Colour Scheme](#colour-scheme)
   * [Typography](#typography)
@@ -37,6 +41,7 @@ All of the crafters are hobbyists who make things for the love of crafting. None
   * [Local Development](#local-development)
     * [How to Fork](#how-to-fork)
     * [How to Clone](#how-to-clone)
+* [SEO](#seo)
 
 * [Testing](#testing)
 
@@ -80,6 +85,29 @@ Key Features
 #### Site Admin Goals
 * Protect customer data and transactions with up-to-date security measures.
 * Manage marketing efforts, newsletters, and social media campaigns.
+
+## Business Plan
+
+To provide a simple, affordable, and efficient platform for crafters to showcase their handmade creations, manage commissions, and connect with customers, all while maintaining flexibility for their side business.
+
+CovenCraft is an app designed for my friends who are hobbyists. They wish to sell their handmade goods and take commissions without the complexities of managing a full-fledged business. The app emphasizes ease of use, low costs, and minimal time investment, catering to their on the fly needs for this side hustle. It's meant to be a low-cost, easy structure with no mandatory subscription fees—commission-based pricing to align with the users' side business model. It also links to a discord group that has been used to take commissions, so future integration with that would be idea.
+
+Revenue wise, this is a passion product of mine to make their lives easier so no Commission on Sales is Taken. The delivery cost is caulated on the fly using their qyuick mental pricing of £10 or 10% of the cost, whichever is greater as the cost of the commission directly corolates to the size of the commission.
+
+By having a web page, it becomes one step closer to becoming a ltd company, A portion of any Savings made from VAT will flow into the upkeep of this app and treats for their eager pet fullstack developer
+
+A mock FB page was made and linked in the deployed version. Facebook may delete fake store pages so I have left a screenshot below:
+
+[Facebook Page for Crafting Covern](assets/documentation/facebook_page.png)
+
+
+## Development
+
+Agile priciples were followed for this app, however I tried to splut off brances and merge development brances with squashed commit messages, normally I would delete these, but the development branches have been left for you to review.
+
+Sometimes, when I tried to do this, I ended up with some messy merges using Gitpod integrated features. These have been cleaned as best I could.
+
+This has been a great experience in learning and working with UX, I've discovered its an area of weakness for me and one I seek to improve on.
 
 ## Design
 ### Colour Scheme
@@ -286,7 +314,6 @@ I have been mindful during coding to ensure that the website is as accessible as
 * [Google Fonts](https://fonts.google.com/)- To import the font used on the website.
 * [Bootraps4](https://getbootstrap.com/docs/5.0/getting-started/introduction/) - provided the scalability and responsiveness design
 
-## Deployment & Local Development
 
 ## SEO
 
@@ -317,6 +344,8 @@ The sitemap can be found [here](/sitemap.xml)
 * Handmade Gifts
 * Spooky Plushies
 
+
+## Deployment & Local Development
 
 ### Deployment
 
