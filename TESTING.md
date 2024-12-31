@@ -180,6 +180,5 @@ Additional testing was taken by friends on a variety of devices and screen sizes
 
 | 6 | Feature | Expected Outcome | Testing Performed | Result | Pass/Fail |
 | - | --- | --- | --- | --- | --- |
-| 6.1 | Make a Purchase | Able to make a purchase | Entered test data for Stripe: 4242 4242 4242 4242 + any future dated expiary + Any CVC + any Zip | Order was created | Pass |
-| 6.2 |Login as a user | Able to login | followed instructions to login | User was authenticed | Pass |
-| 6.3 |Logout as a user | Able to logout | followed instructions to logout | User was signed out | Pass |
+| 6.1 | Make a Purchase | Able to make a purchase | Entered test data for Stripe: 4242 4242 4242 4242 + any future dated expiary + Any CVC + any Zip | Order was created, recorded in Stripe | Pass |
+| 6.2 | Checkout form validation | Unable to submit with faulty data | entered test with bad data | order wnet through | Fail | raised #30 to resolve
