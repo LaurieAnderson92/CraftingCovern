@@ -16,6 +16,7 @@ def checkout(request, id):
     query = Profile.objects.all()
     profile_id = request.user.pk
     order_form = OrderForm()
+    context = {}
 
     try:
         product = Product.objects.get(id=id)
@@ -25,15 +26,6 @@ def checkout(request, id):
             f'The product could not be found, please contact an administrator'
             )
         return redirect(reverse('product_all'))
-
-    product_cost = product.cost
-    tenpercernt = product_cost/10
-    delivery_cost = 0
-
-    if tenpercernt > settings.MINIMUM_DELIVERY_CHARGE:
-        delivery_cost = tenpercernt
-    else:
-        delivery_cost = settings.MINIMUM_DELIVERY_CHARGE
 
     grand_total = product_cost + delivery_cost
     stripe_total = round(grand_total * 100)
@@ -104,14 +96,24 @@ def checkout_success(request, order_number):
     """
     query = Profile.objects.all()
     profile_id = request.user.pk
-    profile = get_object_or_404(query, auth_user_id=profile_id)
-
     order = get_object_or_404(Order, order_number=order_number)
     template = 'checkout/checkout_success.html'
     context = {
-        'order': order,
-        'profile': profile,
-    }
+            'order': order,
+        }
+
+    try:
+        profile = get_object_or_404(query, auth_user_id=profile_id)
+        print("Profile below:")
+        print(profile)
+        context = {
+            'order': order,
+            'profile': profile,
+        }
+    except Exception as e:
+        context = {
+            'order': order,
+        }
     messages.success(
         request,
         f'Your order of ' + order.product.name + ' has been placed.')
