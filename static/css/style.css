@@ -39,6 +39,10 @@ a, p{
     width: 100vw;
 }
 
+.main-content{
+    min-height: 100vh;
+}
+
 .index-title{
     position: relative;
     left: 10vw;
@@ -81,7 +85,6 @@ a, p{
 
 /* Footer */
 footer{
-    position: fixed;
     max-height: 100px;
     bottom: 0px;
     width: 100%;
