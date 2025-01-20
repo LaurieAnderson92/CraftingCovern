@@ -39,6 +39,4 @@ def cart_contents(request):
         "grand_total": grand_total,
     }
 
-    print("Context processor Loaded")
-
     return context

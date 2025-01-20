@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse, HttpResponse
 
 # Create your views here.
 
@@ -28,6 +28,25 @@ def add_to_cart(request, item_id,):
         cart[item_id] = quantity
 
     request.session['cart'] = cart
-    print(request.session['cart']) # Remove this before submission
     return redirect(redirect_url)
+
+def update_cart(request, item_id,):
+    """ Update the quantity of a specified product to the shopping cart """
+
+    quantity = int(request.POST.get('quantity'))
+    cart = request.session.get('cart', {})
+    if quantity > 0:
+        cart[item_id] = quantity
+    else:
+        cart.pop[item_id]
+
+    request.session['cart'] = cart
+    return redirect(reverse('cart'))
+
+def remove_cart(request, item_id,):
+    """ Update the quantity of a specified product to the shopping cart """
+    cart = request.session.get('cart', {})
+    cart.pop(item_id)
+    request.session['cart'] = cart
+    return HttpResponse(status=200)
     
