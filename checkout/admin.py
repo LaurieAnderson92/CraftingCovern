@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import Order
 
 class OrderAdmin(admin.ModelAdmin):
-    readonly_fields = ('order_number','customer','product','date','delivery_cost','order_cost','grand_total')
+    readonly_fields = ('order_number','customer','date','delivery_cost','order_cost','grand_total')
 
     ordering = ['-date']
 

@@ -6,7 +6,7 @@ class OrderForm(forms.ModelForm):
     class Meta:
         model = Order
         fields = (
-                    'customer', 'product', 'full_name',
+                    'customer', 'full_name',
                     'email', 'phone_number',
                     'street_address1', 'street_address2',
                     'town_or_city', 'postcode', 'country',
@@ -22,7 +22,6 @@ class OrderForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         placeholders = {
             'customer': 'Customer',
-            'product': 'Product',
             'full_name': 'Full Name',
             'email': 'Email Address',
             'phone_number': 'Phone Number',
@@ -39,7 +38,6 @@ class OrderForm(forms.ModelForm):
         }
 
         self.fields['customer'].widget.attrs['type'] = 'hidden'
-        self.fields['product'].widget.attrs['type'] = 'hidden'
         for field in self.fields:
             if self.fields[field].required:
                 placeholder = f'{placeholders[field]} *'

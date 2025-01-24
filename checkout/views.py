@@ -41,7 +41,6 @@ def checkout(request, id):
         customer = request.user
         form_data = {
             'customer': customer,
-            'product': product,
             'full_name': request.POST['full_name'],
             'email': request.POST['email'],
             'phone_number': request.POST['phone_number'],
@@ -71,7 +70,6 @@ def checkout(request, id):
             profile = get_object_or_404(query, auth_user_id=profile_id)
             context = {
                 'order_form': order_form,
-                'product': product,
                 'stripe_public_key': stripe_public_key,
                 'client_secret': intent.client_secret,
                 'delivery_cost': delivery_cost,
@@ -81,12 +79,12 @@ def checkout(request, id):
         except Exception as e:
             context = {
                 'order_form': order_form,
-                'product': product,
                 'stripe_public_key': stripe_public_key,
                 'client_secret': intent.client_secret,
                 'delivery_cost': delivery_cost,
                 'grand_total': grand_total,
             }
+    print(cart)
     return render(request, template, context)
 
 

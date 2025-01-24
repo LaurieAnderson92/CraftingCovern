@@ -15,7 +15,6 @@ class Order(models.Model):
     customer = models.ForeignKey(
         User, null=True, blank=True, on_delete=models.SET_NULL, related_name="customer", 
     )
-    product = models.ForeignKey(Product, null=False, blank=False, on_delete=models.PROTECT,)
     full_name = models.CharField(max_length=50, null=False, blank=False)
     email = models.EmailField(max_length=254, null=False, blank=False)
     phone_number = models.CharField(max_length=20, null=False, blank=False)
