@@ -10,8 +10,7 @@ class OrderForm(forms.ModelForm):
                     'email', 'phone_number',
                     'street_address1', 'street_address2',
                     'town_or_city', 'postcode', 'country',
-                    'county', 'delivery_cost',
-                    'order_cost', 'grand_total',
+                    'county'
                 )
 
     def __init__(self, *args, **kwargs):
@@ -37,6 +36,7 @@ class OrderForm(forms.ModelForm):
         }
 
         self.fields['customer'].widget.attrs['type'] = 'hidden'
+        self.fields['full_name'].widget.attrs['autofocus'] = True
         for field in self.fields:
             if self.fields[field].required:
                 placeholder = f'{placeholders[field]} *'
@@ -45,4 +45,4 @@ class OrderForm(forms.ModelForm):
             self.fields[field].widget.attrs['placeholder'] = placeholder
             self.fields[field].widget.attrs['class'] = 'stripe-style-input'
             self.fields[field].label = False
-            self.fields['full_name'].widget.attrs['autofocus'] = True
+            
