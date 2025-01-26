@@ -4,7 +4,6 @@ from django.db import models
 from django.db.models import Sum
 from django.conf import settings
 
-from users.models import Profile
 from products.models import Product
 from django.contrib.auth.models import User
 
@@ -25,8 +24,7 @@ class Order(models.Model):
     street_address2 = models.CharField(max_length=80, null=True, blank=True)
     county = models.CharField(max_length=80, null=True, blank=True)
     date = models.DateTimeField(auto_now_add=True)
-    customisation = models.TextField(max_length=500, null=True, blank=True)
-    delivery_cost = models.DecimalField(max_digits=6, decimal_places=2, null=False, default=0)
+    delivery_cost = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
     order_cost = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
     grand_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
 
@@ -40,7 +38,7 @@ class Order(models.Model):
         """
         Copy the amount the product was at the time of purchase
         """
-        self.order_cost = self.product.cost
+        self.order_cost = self.lineitems.aggregate(Sum('lineitem_cost'))['lineitem_cost__sum']
         tenpercernt = self.order_cost/10
         if tenpercernt > settings.MINIMUM_DELIVERY_CHARGE:
             self.delivery_cost = tenpercernt
@@ -60,3 +58,25 @@ class Order(models.Model):
 
     def __str__(self):
         return self.order_number
+
+
+class OrderLineItem(models.Model):
+    order = models.ForeignKey(
+        Order, null=False, blank=False, on_delete=models.CASCADE, related_name='lineitems'
+    )
+    product = models.ForeignKey(
+        Product, null=False, blank=False, on_delete=models.CASCADE, related_name='product'
+    )
+    customization = models.TextField(max_length=500, null=True, blank=True)
+    lineitem_cost = models.DecimalField(max_digits=6, decimal_places=2, null=False, blank=False, editable=False)
+
+    def save(self, *args, **kwargs):
+        """
+        Override the original save method to set the order number
+        if it hasn't been set already.
+        """
+        self.lineitem_cost = self.product.cost
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f'SKU {self.product.sku} on order {self.order.order_number}'

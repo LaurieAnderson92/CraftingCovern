@@ -10,7 +10,7 @@ class OrderForm(forms.ModelForm):
                     'email', 'phone_number',
                     'street_address1', 'street_address2',
                     'town_or_city', 'postcode', 'country',
-                    'county', 'customisation', 'delivery_cost',
+                    'county', 'delivery_cost',
                     'order_cost', 'grand_total',
                 )
 
@@ -31,7 +31,6 @@ class OrderForm(forms.ModelForm):
             'street_address1': 'Street Address 1',
             'street_address2': 'Street Address 2',
             'county': 'County',
-            'customisation': 'List any customizations you would like',
             'delivery_cost': 'delivery_cost',
             'order_cost': 'order_cost',
             'grand_total': 'grand_total',
