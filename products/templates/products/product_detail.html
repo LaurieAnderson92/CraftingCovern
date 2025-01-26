@@ -58,7 +58,7 @@
     <a href="{% url 'product_edit' product.id %}" class="btn btn-warning">Edit</a>
     <a href="{% url 'product_delete' product.id %}" class="btn btn-danger">Delete</a>
     {% endif %}
-    <a href="{% url 'checkout' product.id %}"class="btn btn-dark">Checkout</a>
+    <a href="{% url 'checkout' %}"class="btn btn-dark">Checkout</a>
   </div>
 </div>
 {% endblock content %}

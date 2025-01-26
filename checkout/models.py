@@ -27,6 +27,7 @@ class Order(models.Model):
     delivery_cost = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
     order_cost = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
     grand_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
+    customization = models.TextField(max_length=500, null=True, blank=True)
 
     def _generate_order_number(self):
         """
@@ -67,7 +68,6 @@ class OrderLineItem(models.Model):
     product = models.ForeignKey(
         Product, null=False, blank=False, on_delete=models.CASCADE, related_name='product'
     )
-    customization = models.TextField(max_length=500, null=True, blank=True)
     lineitem_cost = models.DecimalField(max_digits=6, decimal_places=2, null=False, blank=False, editable=False)
 
     def save(self, *args, **kwargs):

@@ -5,7 +5,8 @@ from .models import Order, OrderLineItem
 class OrderAdmin(admin.ModelAdmin):
     readonly_fields = ('order_number','customer',
                        'date','delivery_cost',
-                       'order_cost','grand_total')
+                       'order_cost','grand_total',
+                       'customization')
     
     ordering = ['-date']
     
@@ -16,7 +17,7 @@ class OrderAdmin(admin.ModelAdmin):
 
 class OrderLineItemAdmin(admin.ModelAdmin):
     readonly_fields = ('order', 'product',
-                       'customization', 'lineitem_cost',)
+                       'lineitem_cost',)
 
 
 # Register your models here.

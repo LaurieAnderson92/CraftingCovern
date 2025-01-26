@@ -10,7 +10,7 @@ class OrderForm(forms.ModelForm):
                     'email', 'phone_number',
                     'street_address1', 'street_address2',
                     'town_or_city', 'postcode', 'country',
-                    'county'
+                    'county', 'customization'
                 )
 
     def __init__(self, *args, **kwargs):
@@ -33,6 +33,7 @@ class OrderForm(forms.ModelForm):
             'delivery_cost': 'delivery_cost',
             'order_cost': 'order_cost',
             'grand_total': 'grand_total',
+            'customization':'Enter your customization request here',
         }
 
         self.fields['customer'].widget.attrs['type'] = 'hidden'

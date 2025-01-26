@@ -16,7 +16,8 @@ Including another URLconf
 from django.urls import path
 from . import views
 
+# Every Path will be prefixed with 'checkout/'
 urlpatterns = [
-    path('checkout/<int:id>/', views.checkout, name='checkout'),
+    path('', views.checkout, name='checkout'),
     path('checkout_success/<order_number>/', views.checkout_success, name='checkout_success'),
 ]

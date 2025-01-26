@@ -1,74 +1,98 @@
 {% extends "base.html" %}
-
 {% load static %}
-
+{% load cart_tools %}
 
 {% block content %}
-<div class="row mt-5 justify-content-center">
-    <div class="col-10"><p>You are ordering a bespoke <strong>{{ product.name }}</strong> Please fill out the form below to complete your order</p></div>
-    <div class="col-10 col-lg-5">
-        <img class="card-img-bottom" id="detail-image" src=" {{ product.image.url }}"
-            alt="{{ product.name }}">
-    </div>
-    <div class="col-12 col-lg-5 offset-1 offset-lg-0 ">
-        <form action="#" method="POST" id="payment-form">
-            {% csrf_token %}
-            <fieldset class="">
-                <legend class="small">Your Details</legend>
-                {{ order_form.full_name | as_crispy_field }}
-                {{ order_form.email | as_crispy_field }}
-                {{ order_form.phone_number | as_crispy_field }}
-            </fieldset>
-            <br>
-            <fieldset class="">
-                <legend class="small">Package Details</legend>
-                {{ order_form.street_address1 | as_crispy_field }}
-                {{ order_form.street_address2 | as_crispy_field }}
-                {{ order_form.town_or_city | as_crispy_field }}
-                {{ order_form.county | as_crispy_field }}
-                {{ order_form.country | as_crispy_field }}
-                {{ order_form.postcode | as_crispy_field }}
-            </fieldset>
-            <br>
-            <fieldset>
-                <legend class="small">Customization</legend>
-                {{ order_form.customisation | as_crispy_field }}
-            </fieldset>
-            <br>
-            <fieldset class="">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <hr>
+                <h2 class="logo-font mb-4">Shopping Cart</h2>
+                <hr>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p class="text-muted">Order Summary ({{ products_count }})</p>
                 <div class="row">
-                    <div class="col-3">
-                        <div class="small">Item Cost: </div>
-                        <div class="small">Delivery: </div>
-                        <hr>
-                        <div class="small"><strong>Total Charge: </strong></div>
+                    <div class="col-7 offset-2">
+                        <p class="mb-1 mt-0 small text-muted">Item</p>
                     </div>
-                    <div class="col-3">
-                        <div class="small">£{{ product.cost }}</div>
-                        <div class="small">£{{ delivery_cost }} </div>
-                        <hr>
-                        <div class="small"><strong>£{{ grand_total }}</strong></div>
+                    <div class="col-3 text-right">
+                        <p class="mb-1 mt-0 small text-muted">Subtotal</p>
                     </div>
                 </div>
-                <br>
-                <div class="border p-3">
-                <!-- A Stripe card element -->
-                <div id="card-element"></div>
-                <!-- Display form errors -->
-                <div class="text-danger" id="card-errors"></div>
+                {% for item in cart_items %}
+                    <div class="row">
+                        <div class="col-2 mb-1">
+                            <a href="{% url 'product_detail' item.product.id %}">
+                                {% if item.product.image %}
+                                    <img class="w-100" src="{{ item.product.image.url }}" alt="{{ product.name }}">
+                                {% else %}
+                                    <img class="w-100" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
+                                {% endif %}
+                            </a>
+                        </div>
+                        <div class="col-7">
+                            <p class="my-0"><strong>{{ item.product.name }}</strong></p>
+                            <p class="my-0 small text-muted">Qty: {{ item.quantity }}</p>
+                        </div>
+                        <div class="col-3 text-right">
+                            <p class="my-0 small text-muted">£{{ item.product.cost | calc_subtotal:item.quantity }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+                <hr class="my-0">
+
+                <div class="row text-black text-right">
+                    <div class="col-7 offset-2">
+                        <p class="my-0">Order Total:</p>
+                        <p class="my-0">Delivery:</p>
+                        <p class="my-0">Grand Total:</p>
+                    </div>
+                    <div class="col-3">
+                        <p class="my-0">£{{ total | floatformat:2 }}</p>
+                        <p class="my-0">£{{ delivery_cost | floatformat:2 }}</p>
+                        <p class="my-0"><strong>£{{ grand_total | floatformat:2 }}</strong></p>
+                    </div>
                 </div>
-            </fieldset>
-            <br>
-            <button id="submit-button" class="btn btn-dark mb-4">
-                <span class="font-weight-bold">Complete Order</span>
-                <span class="icon">
-                    <i class="fas fa-lock"></i>
-                </span>
-            </button>
-        </form>
+            </div>
+            <div class="col">
+                <form action="{% url 'checkout' %}" method="POST" id="payment-form">
+                    {% csrf_token %}
+                    <fieldset>
+                        <legend> Customer Details</legend>
+                        {{ order_form.full_name | as_crispy_field }} 
+                        {{ order_form.email | as_crispy_field }}
+                        {{ order_form.phone_number | as_crispy_field }}
+                    </fieldset>
+                    <fieldset>
+                        <legend> Shipping Details</legend>
+                        {{ order_form.country | as_crispy_field }}
+                        {{ order_form.postcode | as_crispy_field }}
+                        {{ order_form.town_or_city | as_crispy_field }}
+                        {{ order_form.street_address1 | as_crispy_field }}
+                        {{ order_form.street_address2 | as_crispy_field }}
+                        {{ order_form.county | as_crispy_field }}
+                    </fieldset>
+                    <fieldset>
+                        <legend> Customization Details</legend>
+                        {{ order_form.customization | as_crispy_field }} 
+                    </fieldset>
+                    <fieldset>
+                        <legend>Payment Details</legend>
+                        <!-- A Stripe card element will go here -->
+                        <div id="card-element"></div>
+
+                        <!-- Used to display form errors -->
+                        <div id="card-errors" role="alert"></div>
+                        <span>Your card will be charged <strong>£{{ grand_total|floatformat:2 }}</strong></span>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
     </div>
-</div>
-{% endblock content %}
+{% endblock %}
 
 {% block postloadjs %}
     {{ block.super }}
