@@ -44,8 +44,8 @@ class Order(models.Model):
         if tenpercernt > settings.MINIMUM_DELIVERY_CHARGE:
             self.delivery_cost = tenpercernt
         else:
-            self.delivery_cost = settings.MINIMUM_DELIVERY_CHARG
-        self.grand_total = self.order_cost + self + delivery_cost
+            self.delivery_cost = settings.MINIMUM_DELIVERY_CHARGE
+        self.grand_total = self.order_cost + self.delivery_cost
         self.save()
 
     def save(self, *args, **kwargs):

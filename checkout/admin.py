@@ -19,6 +19,7 @@ class OrderLineItemAdmin(admin.ModelAdmin):
     readonly_fields = ('order', 'product',
                        'lineitem_cost',)
 
+ordering = ['order']
 
 # Register your models here.
 admin.site.register(Order, OrderAdmin)
