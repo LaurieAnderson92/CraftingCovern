@@ -29,7 +29,10 @@ def cart_contents(request):
     else:
         delivery_cost = settings.MINIMUM_DELIVERY_CHARGE
 
-    grand_total = total + delivery_cost
+    if total > 0:
+        grand_total = total + delivery_cost
+    else:
+        grand_total = total
 
     context = {
         "cart_items": cart_items,
