@@ -40,7 +40,7 @@ a, p{
 }
 
 .main-content{
-    min-height: calc(100vh + 100px);
+    min-height: 90vh;
 }
 
 .index-title{
