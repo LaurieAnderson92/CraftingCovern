@@ -5,6 +5,7 @@ from users.models import Profile
 import stripe
 from decimal import Decimal
 
+
 from products.models import Product
 from .forms import OrderForm
 from .models import Order, OrderLineItem
@@ -34,7 +35,11 @@ def checkout(request):
         )
 
     if request.method == 'POST':
-        customer = request.user
+        if request.user.is_authenticated:
+            customer = request.user
+        else:
+            customer = None
+
         form_data = {
             'customer': customer,
             'full_name': request.POST['full_name'],
