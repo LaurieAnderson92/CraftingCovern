@@ -77,7 +77,6 @@ def checkout(request):
                         )
                         order.delete()
                         return redirect(reverse('view_cart'))
-                print("TEST: LINE ITEMS CREATED")
             try:
                 subject = f'Your Coven Crafts Order:{order.order_number}'
                 body = f'''Thank you for your order with Coven crafts!
