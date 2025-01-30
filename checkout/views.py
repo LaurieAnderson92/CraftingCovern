@@ -4,6 +4,7 @@ from django.contrib import messages
 from users.models import Profile
 import stripe
 from decimal import Decimal
+from django.core.mail import send_mail
 
 
 from products.models import Product
@@ -39,11 +40,12 @@ def checkout(request):
             customer = request.user
         else:
             customer = None
-
+        from_email = settings.EMAIL_HOST_USER
+        to_email = request.POST['email']
         form_data = {
             'customer': customer,
             'full_name': request.POST['full_name'],
-            'email': request.POST['email'],
+            'email': to_email,
             'phone_number': request.POST['phone_number'],
             'country': request.POST['country'],
             'postcode': request.POST['postcode'],
@@ -75,10 +77,24 @@ def checkout(request):
                         )
                         order.delete()
                         return redirect(reverse('view_cart'))
-
-            return redirect(
-                reverse('checkout_success', args=[order.order_number])
+                print("TEST: LINE ITEMS CREATED")
+            try:
+                subject = f'Your Coven Crafts Order:{order.order_number}'
+                body = f'''Thank you for your order with Coven crafts!
+                    Your order Total is: {grand_total}
+                    Your order will be Shipped as soon as it has been crafted!'''
+                send_mail(
+                    subject,
+                    body,
+                    from_email,
+                    [to_email]
                 )
+                return redirect(reverse('checkout_success', args=[order.order_number])
+            )
+            except Exception as e:
+                print(e) 
+                messages.error(request, ("There was an Error generating your Email, please contact us"))
+                reverse('checkout_success', args=[order.order_number])
         else:
             messages.error(
                 request,
