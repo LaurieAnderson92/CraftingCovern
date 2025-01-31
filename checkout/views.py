@@ -88,6 +88,7 @@ def checkout(request):
                     from_email,
                     [to_email]
                 )
+                del request.session['cart']
                 return redirect(reverse('checkout_success', args=[order.order_number])
             )
             except Exception as e:
