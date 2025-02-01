@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <!-- FAQ Categories Sidebar -->
+    <div class="col-lg-3 d-none d-lg-block">
+        <div class="sticky-top">
+            <h3 class="mb-3">Categories</h3>
+            <div class="list-group">
+                {% for category in categories %}
+                <a href="#{{ category.slug }}" class="list-group-item list-group-item-action">
+                    <i class="fas fa-folder-open mr-2"></i>
+                    {{ category.name }}
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Main FAQ Content -->
+    <div class="col-lg-9">
+        <div class="card card-outline card-primary">
+            <div class="card-header">
+                <h2>Frequently Asked Questions</h2>
+            </div>
+            <div class="card-body">
+                {% for category in categories %}
+                <div id="{{ category.slug }}" class="faq-category mb-4">
+                    <h3 class="mb-3">{{ category.name }}</h3>
+                    <div class="accordion" id="accordion_{{ category.slug }}">
+                        {% for faq in faqs %}
+                        {% if faq.category == category %}
+                        <div class="card">
+                            <div class="card-header" id="heading_{{ faq.id }}">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link btn-block text-left faq-question" 
+                                            type="button" data-toggle="collapse" 
+                                            data-target="#collapse_{{ faq.id }}"
+                                            aria-expanded="true" 
+                                            aria-controls="collapse_{{ faq.id }}">
+                                        {{ faq.question }}
+                                    </button>
+                                </h5>
+                            </div>
+                            <div id="collapse_{{ faq.id }}" 
+                                 class="collapse show" 
+                                 aria-labelledby="heading_{{ faq.id }}"
+                                 data-parent="#accordion_{{ category.slug }}">
+                                <div class="card-body faq-answer">
+                                    {{ faq.answer | safe }}
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

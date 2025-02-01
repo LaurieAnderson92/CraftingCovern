@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import FAQ, FAQCategory, Contact
 
-@admin.register(FaqCategory)
+@admin.register(FAQCategory)
 class FaqCategoryAdmin(admin.ModelAdmin):
     list_display = ('name', 'slug')
 
