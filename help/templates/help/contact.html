@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card contact-form">
+            <div class="card-header">
+                <h2>Contact Us</h2>
+                <p>We'd love to hear from you! Please fill out this form and we'll get back to you shortly.</p>
+            </div>
+            <div class="card-body">
+                <form action="{% url 'contact' %}" method="POST" id="payment-form">
+                    {% csrf_token %}
+                    {{ contact_form.name | as_crispy_field }}
+                    {{ contact_form.email | as_crispy_field }}
+                    {{ contact_form.phone | as_crispy_field }}
+                    {{ contact_form.message | as_crispy_field }}
+                    <button id="submit-button" class="btn btn-warning rounded-0">
+                        <span class="font-weight-bold">Contact Us</span>
+                        <span class="icon">
+                            <i class="fa-solid fa-envelope"></i>
+                        </span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
