@@ -23,9 +23,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     path('', include('products.urls')),
-    path('', include('users.urls')),
+    path('profile/', include('users.urls')),
     path('checkout/', include('checkout.urls')),
     path('cart/', include('cart.urls')),
+    path('help/', include('help.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 handler404 = page_not_found
