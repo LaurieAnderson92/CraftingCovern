@@ -40,7 +40,7 @@ a, p{
 }
 
 .main-content{
-    min-height: 100vh;
+    min-height: 90vh;
 }
 
 .index-title{
@@ -82,10 +82,40 @@ a, p{
     padding: 2px;
 }
 
+/* FAQ Page */
+.faq-category {
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.faq-question {
+    color: #2c3e50;
+    font-weight: 500;
+}
+
+.faq-answer {
+    color: #34495e;
+    font-size: 1.05rem;
+}
+
+.contact-form {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 768px) {
+    .faq-categories {
+        display: none;
+    }
+}
 
 /* Footer */
 footer{
-    height: 50px;
+    max-height: 100px;
     bottom: 0px;
     width: 100%;
     background: whitesmoke;
