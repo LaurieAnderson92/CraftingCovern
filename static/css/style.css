@@ -6,6 +6,19 @@ a:hover{
     color: #490E4B
 }
 
+.form-control:focus{
+    color: #495057;
+    background-color: #fff;
+    border-color: #460848;
+    outline: 0;
+    box-shadow: 0 0 0 .2rem rgba(73,14,75,.25)
+}
+
+.btn-purple {
+    color: #fefef5;
+    background-color: #490E4B;
+    border-color: #490E4B;
+}
 
 /* Logo */
 .logo{
