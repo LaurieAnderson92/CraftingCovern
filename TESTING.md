@@ -148,7 +148,6 @@ Additional testing was taken by friends on a variety of devices and screen sizes
 | 2 | Feature | Expected Outcome | Testing Performed | Result | Pass/Fail |
 | - | --- | --- | --- | --- | --- |
 | 2.1 | Product cards linked | Link directs the user to the associated product's detail view | Clicked product card | Directed to product | Pass |
-| 2.2 | Pagnaite the view | The user should be able to click next and previous if there are more than 12 products | create 13 products and move back and forth between the pages | Next and Prev Buttons do not appear | Fail |
 
 
 #### 3 Product Detail 
@@ -181,4 +180,4 @@ Additional testing was taken by friends on a variety of devices and screen sizes
 | 6 | Feature | Expected Outcome | Testing Performed | Result | Pass/Fail |
 | - | --- | --- | --- | --- | --- |
 | 6.1 | Make a Purchase | Able to make a purchase | Entered test data for Stripe: 4242 4242 4242 4242 + any future dated expiary + Any CVC + any Zip | Order was created, recorded in Stripe | Pass |
-| 6.2 | Checkout form validation | Unable to submit with faulty data | entered test with bad data | order wnet through | Fail | raised #30 to resolve
+| 6.2 | Checkout form validation | Unable to submit with faulty address data | entered test with bad data | order went through | Fail | raised #30 to resolve
