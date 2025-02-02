@@ -31,12 +31,13 @@
 </head>
 <body>
     <header class="container-fluid">
-        <!-- Logo, Search Bar, Account -->
         <div class="row text-center">
-            <div class="col-6 col-lg-2 p-1 order-0">
-                <a href="{% url 'home' %}" class="logo px-3 ">CovernCrafts</a>
+            <!-- Logo -->
+            <div class="col-4 col-lg-2 p-1 order-0 d-none d-sm-block">
+                <a href="{% url 'home' %}" class="logo px-3 align-self-center">CovernCrafts</a>
             </div>
-            <div class="col-12 col-lg-8 my-auto justify-content-center order-2 order-lg-1">
+            <!-- Search Bar -->
+            <div class="col-12 col-lg-6 col-xl-7 my-auto justify-content-center order-2 order-lg-1">
                 <form method="GET" action="{% url 'product_all' %}">
                     <div class="input-group w-100">
                         <input class="form-control" type="text" name="q" placeholder="Search our site">
@@ -50,11 +51,12 @@
                     </div>
                 </form>
             </div>
-            <div class="col-6 col-lg-2 p-3 order-lg-2 order-1">
-                <ul class="nav">
+            <!-- Account -->
+            <div class="col-12 col-sm-8 col-lg-4 col-xl-3 p-1 order-lg-2 order-1">
+                <ul class="nav row">
                     {% if user.is_authenticated %}
                     <!-- Profile Dropdown -->
-                    <li class="nav-item">
+                    <li class="nav-item flex-grow-2 align-self-center">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Welcome {{user.username}}</a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="{% url 'profile_detail' user.pk %}">Profile</a>
@@ -72,22 +74,22 @@
                     {% endif %}
                     <!-- Allauth Login/Logout/Signup -->
                     {% if user.is_authenticated %}
-                    <li class="nav-item">
+                    <li class="nav-item flex-grow-1 align-self-center">
                         <a class="nav-link {% if request.path == logout_url %}active{% endif %}"
                             href="{% url 'account_logout' %}">Logout</a>
                     </li>
                     {% else %}
-                    <li class="nav-item">
+                    <li class="nav-item flex-grow-1 align-self-center">
                         <a class="nav-link {% if request.path == signup_url %}active{% endif %}"
                             href="{% url 'account_signup' %}">Register</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item flex-grow-1 align-self-center">
                         <a class="nav-link {% if request.path == login_url %}active{% endif %}"
                             href="{% url 'account_login' %}">Login</a>
                     </li>
                     {% endif %}
                     <!-- Basket -->
-                    <li class="nav-item">
+                    <li class="nav-item flex-grow-1 align-self-center">
                         <a class="{% if grand_total %}text-warning font-weight-bold{% else %}text-black{% endif %} nav-link" href="{% url 'cart' %}">
                             <div class="text-center">
                                 <div><i class="fas fa-shopping-bag fa-lg"></i></div>
@@ -164,25 +166,29 @@
 
     <footer>
         <!-- footer -->
-        <div class="container-fluid">
-            <p class="p-2 text-center">Check out our Socials | 
+        <div class="container-fluid row">
+            <p class="text-center p-1 m-0">Check out our Socials | </p>
             <a href="https://discord.gg/cnxeu4kUtW" target="_blank" rel="noopener" aria-label="visit the Discord server (opens in a new tab)"
-            class="social-link">
-                <i class="fa-brands fa-discord px-3"></i>Discord
+            class="social-link p-1 m-0 text-center">
+                <i class="fa-brands fa-discord px-2"></i>Discord
             </a>
             <a href="https://www.facebook.com/profile.php?id=61571150651366" target="_blank" rel="noopener" aria-label="visit our Facebook page (opens in a new tab)"
-            class="social-link">
+            class="social-link p-1 m-0 text-center">
                 <i class="fa-brands fa-facebook px-2"></i>Facebook
             </a>
+        </div>
+        <div class="container-fluid row">
+            <p class="text-center p-1 m-0 text-center">About | </p>
             <a href="{% url 'faq' %}" rel="noopener" aria-label="Open our FAQ page"
-            class="social-link">
-                <i class="fa-solid fa-question"></i>FAQ
+            class="social-link p-1 m-0">
+                <i class="fa-solid fa-question px-2"></i>FAQ
             </a>
             <a href="{% url 'contact' %}" rel="noopener" aria-label="Open our FAQ page"
-            class="social-link">
-                <i class="fa-solid fa-envelope"></i>Contact Us
+            class="social-link p-1 m-0 text-center">
+                <i class="fa-solid fa-envelope px-2"></i>Contact Us
             </a>
-            </p>
+        </div>
+        <div class="container-fluid row text-center">
             <p class="text-right m-0">© 2024 Copyright | Fullstack Anderson</p>
         </div>
     </footer>

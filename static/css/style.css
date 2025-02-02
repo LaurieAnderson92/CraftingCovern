@@ -2,6 +2,10 @@ a, p{
     font-family: "Geist", serif;
 }
 
+a:hover{
+    color: #490E4B
+}
+
 
 /* Logo */
 .logo{
@@ -47,7 +51,7 @@ a, p{
     position: relative;
     left: 10vw;
     top: 10vh;
-    background-color: #FFBF00;
+    background-color: #490E4B;
     padding: 0.5rem;
     width: 60vw;
 }
@@ -115,7 +119,6 @@ a, p{
 
 /* Footer */
 footer{
-    max-height: 100px;
     bottom: 0px;
     width: 100%;
     background: whitesmoke;
@@ -123,7 +126,7 @@ footer{
 
 .social-link{
     color: black;
-    font-size: 1.5rem;
+    font-size: 1rem;
 }
 
 /* Toasts */
