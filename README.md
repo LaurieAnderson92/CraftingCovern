@@ -215,6 +215,30 @@ I used Geist for a simple, clean look that's sans serif so it'll be eaiser to re
 | order_cost | DecimalField | N    | N    | Cost of the ordered product(s) |
 | grand_total | DecimalField | N    | N    | Total cost including delivery |
 
+#### FAQ Catagory
+| Field Name | Data Type | Null | Blank | Description |
+|-----------|----------|------|-------|-------------|
+|name |	CharField |	N |	N |	Category name |
+|slug |	SlugField |	N |	N |	Unique identifier for URL |
+
+#### FAQ
+| Field Name | Data Type | Null | Blank | Description |
+|-----------|----------|------|-------|-------------|
+| category | ForeignKey| 	N| 	N| 	Reference to FAQCategory
+question| 	TextField| 	N| 	N| 	FAQ question content
+answer| 	TextField| 	N| 	N| 	FAQ answer content
+created_at| 	DateTimeField| 	N| 	N| 	Timestamp when created
+updated_at| 	DateTimeField| 	N| 	N| 	Timestamp when last updated
+
+#### Contact
+| Field Name | Data Type | Null | Blank | Description |
+|-----------|----------|------|-------|-------------|
+| name| 	CharField| 	N| 	N| 	Contact person's name
+| email| 	EmailField| 	N| 	N| 	Contact email address
+| phone| 	CharField| 	N| 	Y| 	Optional contact phone number
+| message| 	TextField| 	N| 	N| 	Contact message content
+| created_at| 	DateTimeField| 	N| 	N| 	Timestamp when created
+
 ## Features
 
 ### Current Features
