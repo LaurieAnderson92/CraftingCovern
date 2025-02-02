@@ -112,7 +112,7 @@ This has been a great experience in learning and working with UX, I've discovere
 ## Design
 ### Colour Scheme
 
-![Colour Palette of Whitesmoke, Alabaster, Amber, Onyx and Eerie Black](assets/documentation/colourpalette.jpeg)
+![Colour Palette of Whitesmoke, Alabaster, Russian Violet, Onyx and Eerie Black](assets/documentation/colourpalette.png)
 
 #### F5F5F5 | Whitesmoke 
 * I used Whitesmoke as a offwhite colour as the background for the page, as #FFFFFF has a very sterile and clinical feel to it, and this muted white has a matt loock that contrasts with Amber and Onyx
@@ -120,8 +120,8 @@ This has been a great experience in learning and working with UX, I've discovere
 #### EFECE5 | Alabaster
 * Alabaster was picked for me, as it is the background of the striking image I put on my front page and login pages, using it throught the site creates consistancy
 
-#### FFc107 | Amber
-* Amber is a a ligter shake of Pumpkin, which was origionally used. I picked amber because of its lighter contrast and higher yellow value which makes it easier to see for users who are corona-diverse
+#### 490E4B | Russian Violet
+* Russian Violet is a Deep Purple. I picked it for its halloween theme and its opposition to the colour of the cover photo pumpkin It pared well with white which makes it easier to see for users who are corona-diverse
 
 #### 353935 | Onyx
 * Onyx was also picked for me as It's the colour of the witch's outfit in my main image and it constrasts nice with the alabaster.
@@ -141,9 +141,9 @@ I used Geist for a simple, clean look that's sans serif so it'll be eaiser to re
 
 ### Wireframes
 
-![A wireframe of the Index page](assets/documentation/wireframe_index.jpeg)
-![A wireframe of the product List ](assets/documentation/wireframe_list.jpeg)
-![A wireframe of the product Detail](assets/documentation/wireframe_detail.jpeg)
+![A wireframe of the Index page](assets/documentation/wireframe_index.jpg)
+![A wireframe of the product List ](assets/documentation/wireframe_list.jpg)
+![A wireframe of the product Detail](assets/documentation/wireframe_detail.jpg)
 
 ### ERD
 
@@ -217,18 +217,20 @@ I used Geist for a simple, clean look that's sans serif so it'll be eaiser to re
 
 ## Features
 
+### Current Features
 The website is comprised of a index page, a product list page, a product detail page, a checkout page, a profile page, a Page with the newsletter signup information, A 404 page, and a confirmation page.
 
+#### All Pages
 All pages on the website are responsive and have:
 
-* A favicon in the browser tab.  
-![Image of the favicon](assets/documentation/features_favicon.jpeg)
+A favicon in the browser tab.  
+![Image of the favicon](assets/documentation/features_favicon.jpg)
 
-* A navigation bar alonside a text based logo, which also acts as a link to the homepage as per convention.  
-![Image of the Navigation bar](assets/documentation/features_navbar.jpeg)
+A navigation bar alonside a text based logo, which also acts as a link to the homepage as per convention.  
+![Image of the Navigation bar](assets/documentation/features_navbar.jpg)
 
 #### The Home Page
-![Screenshot of the homepage](assets/documentation/features_homepage.jpeg)  
+![Screenshot of the homepage](assets/documentation/features_homepage.jpg)  
 The Homepage of the CovenCrafts website displays the cover photo, setting out the imedate theme for the products that you will find inside.
 
 #### The Product List Page
@@ -240,7 +242,7 @@ The Product List of the CovenCrafts website displays the products that its craft
 The Product add page contains a form for Crafters and Site Admins of CovenCrafts can use to create a new product, either to add to their roster of things to craft for their fanbase, or for a on the fly commission.
 
 #### Product Detail Page
-![Screenshot of a spell Detail page](assets/documentation/features_productdetail.jpg)  
+![Screenshot of a product Detail page](assets/documentation/features_productdetail.jpg)  
 Clicking on a Product detail page will display the cost of the product alongside its description and measurements. If the user is a crafter or an admin, they will also have the option to edit the product and delete it.
 
 #### Profile Page
@@ -388,7 +390,7 @@ Issues that required me to stop and think and research the awnser were listed as
 
 ### Code Used
 
-I used the code to paginate the spell detail page which was taken from the CI django blog project.
+I used the bag logic and checkout Logic from Boutique Ado.
 
 ### Content
 
