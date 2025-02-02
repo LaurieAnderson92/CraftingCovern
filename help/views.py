@@ -1,7 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.conf import settings
 from .models import FAQ, FAQCategory, Contact
+from users.models import Profile
 from .forms import ContactForm
 from django.core.mail import send_mail
 
@@ -11,7 +12,9 @@ def faq_view(request):
     template = 'help/faq.html'
     
     try:
-        profile = get_object_or_404(query, auth_user_id=profile_id)
+        profile_query = Profile.objects.all()
+        profile_id = request.user.pk
+        profile = get_object_or_404(profile_query, auth_user_id=profile_id)
         context = {
             'categories': categories,
             'faqs': faqs,
@@ -53,7 +56,9 @@ def contact_view(request):
         template = 'help/contact.html'
     
     try:
-        profile = get_object_or_404(query, auth_user_id=profile_id)
+        profile_query = Profile.objects.all()
+        profile_id = request.user.pk
+        profile = get_object_or_404(profile_query, auth_user_id=profile_id)
         context = {
             'profile': profile,
             'contact_form': contact_form,
