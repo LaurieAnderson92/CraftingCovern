@@ -389,6 +389,8 @@ Heroku was used to deploy the live website. The instructions to achieve this are
 
 ### Local Development
 
+For all Local Deployments, please make sure that you have Python 3 installed and have donaloaded the ![requirements](requirements.txt)
+
 #### How to Fork
 
 * Log in (or sign up) to Github.
